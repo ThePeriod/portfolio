@@ -1,0 +1,52 @@
+{
+	"name": "AWS_Declaraciones_BKP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "EstadoDeclaracionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PeriodoId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "EmpleadorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaPresentacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CantidadInformados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DeclaranteId",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Declaraciones_BKP"
+		}
+	}
+}
