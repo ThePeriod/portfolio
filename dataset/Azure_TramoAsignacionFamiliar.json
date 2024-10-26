@@ -1,0 +1,30 @@
+{
+	"name": "Azure_TramoAsignacionFamiliar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Codigo",
+				"type": "char"
+			},
+			{
+				"name": "Glosa",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TramoAsignacionFamiliar"
+		}
+	}
+}
