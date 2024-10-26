@@ -1,0 +1,37 @@
+{
+	"name": "Azure_TerminosCondiciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EmpleadorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RutRepresentanteElectronico",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DvRepresentanteElectronico",
+				"type": "char"
+			},
+			{
+				"name": "FechaRegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TerminosCondiciones"
+		}
+	}
+}
