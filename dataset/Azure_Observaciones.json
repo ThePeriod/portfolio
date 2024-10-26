@@ -1,0 +1,36 @@
+{
+	"name": "Azure_Observaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ReglaObservacionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ReglaObservacionGlosa",
+				"type": "varchar"
+			},
+			{
+				"name": "RemuneracionId",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Observaciones"
+		}
+	}
+}
