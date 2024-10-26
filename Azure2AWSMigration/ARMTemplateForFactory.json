@@ -7,21 +7,9 @@
 			"metadata": "Data Factory name",
 			"defaultValue": "Azure2AWSMigration"
 		},
-		"AmazonRdsForSqlServer1_password": {
+		"AWS_RDS_SQLServer_password": {
 			"type": "secureString",
-			"metadata": "Secure string for 'password' of 'AmazonRdsForSqlServer1'"
-		},
-		"AmazonRdsForSqlServer1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
-		},
-		"AmazonRdsForSqlServer1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "lre_prod_db"
-		},
-		"AmazonRdsForSqlServer1_properties_typeProperties_userName": {
-			"type": "string",
-			"defaultValue": "admin"
+			"metadata": "Secure string for 'password' of 'AWS_RDS_SQLServer'"
 		},
 		"AzureSqlDatabase1_properties_typeProperties_server": {
 			"type": "string",
@@ -30,43 +18,24 @@
 		"AzureSqlDatabase1_properties_typeProperties_database": {
 			"type": "string",
 			"defaultValue": "LibroRemuneraciones"
+		},
+		"AWS_RDS_SQLServer_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
+		},
+		"AWS_RDS_SQLServer_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "lre_prod_db"
+		},
+		"AWS_RDS_SQLServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "migration_user"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AWS_AFP')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AmazonRdsForSqlServer1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AmazonRdsForSqlServerTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "Nombre",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "Afp"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AmazonRdsForSqlServer1')]"
-			]
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Azure_AFP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1762,28 +1731,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AmazonRdsForSqlServer1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AmazonRdsForSqlServer",
-				"typeProperties": {
-					"server": "[parameters('AmazonRdsForSqlServer1_properties_typeProperties_server')]",
-					"database": "[parameters('AmazonRdsForSqlServer1_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SQL",
-					"userName": "[parameters('AmazonRdsForSqlServer1_properties_typeProperties_userName')]",
-					"password": {
-						"type": "SecureString",
-						"value": "[parameters('AmazonRdsForSqlServer1_password')]"
-					}
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
 			"apiVersion": "2018-06-01",
@@ -3235,6 +3182,59 @@
 			},
 			"dependsOn": [
 				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_RDS_SQLServer')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AmazonRdsForSqlServer",
+				"typeProperties": {
+					"server": "[parameters('AWS_RDS_SQLServer_properties_typeProperties_server')]",
+					"database": "[parameters('AWS_RDS_SQLServer_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('AWS_RDS_SQLServer_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('AWS_RDS_SQLServer_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_AFP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AWS_RDS_SQLServer",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AmazonRdsForSqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Afp"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AWS_RDS_SQLServer')]"
 			]
 		}
 	]
