@@ -1,0 +1,42 @@
+{
+	"name": "Azure_HaberesImponiblesNoTributables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SubsidioIncapacidadLaboral",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BecaEstudio",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GratificacionZona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OtrosIngresosNoConstitutivos",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "HaberesImponiblesNoTributables"
+		}
+	}
+}
