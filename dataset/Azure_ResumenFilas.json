@@ -1,0 +1,41 @@
+{
+	"name": "Azure_ResumenFilas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Esquema",
+				"type": "varchar"
+			},
+			{
+				"name": "Tabla",
+				"type": "varchar"
+			},
+			{
+				"name": "Filas",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "FechaRegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ResumenFilas"
+		}
+	}
+}
