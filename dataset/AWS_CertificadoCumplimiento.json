@@ -1,0 +1,157 @@
+{
+	"name": "AWS_CertificadoCumplimiento",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "EsRectificacion",
+				"type": "bit"
+			},
+			{
+				"name": "TotalIntentos",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "FechaPrimerEnvio",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "FechaPresentacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Mes",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Anno",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "FechaGeneracion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Rut",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Dv",
+				"type": "char"
+			},
+			{
+				"name": "RazonSocial",
+				"type": "varchar"
+			},
+			{
+				"name": "CantidadTrabajadores",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Haberes5210",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Haberes5220",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Haberes5230",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Haberes5240",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Haberes5201",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Descuentos5361",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Descuentos5362",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Descuentos5341",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Descuentos5302",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Descuentos5301",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Otros5410",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Otros5502",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Otros5564",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Otros5565",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Otros5501",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CertificadoCumplimiento"
+		}
+	}
+}

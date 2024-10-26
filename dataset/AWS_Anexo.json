@@ -1,0 +1,34 @@
+{
+	"name": "AWS_Anexo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Glosa",
+				"type": "varchar"
+			},
+			{
+				"name": "Value",
+				"type": "varchar"
+			},
+			{
+				"name": "FechaAnexo",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Anexo"
+		}
+	}
+}

@@ -1,0 +1,52 @@
+{
+	"name": "AWS_AportesEmpleador",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "AfcEmpleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SeguroAccidenteTrabajoSanna",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionTodoEvento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AdicionalTrabajoPesado",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SeguroInvalidezSobrevivencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AhorroPrevisionalVoluntarioColectivo",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AportesEmpleador"
+		}
+	}
+}

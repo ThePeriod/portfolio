@@ -1,0 +1,40 @@
+{
+	"name": "AWS_CuotaSindical",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "IdOrganizacionSindical",
+				"type": "varchar"
+			},
+			{
+				"name": "CuotaSindical",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Glosa",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CuotaSindical"
+		}
+	}
+}
