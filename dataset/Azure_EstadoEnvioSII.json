@@ -1,0 +1,108 @@
+{
+	"name": "Azure_EstadoEnvioSII",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EnvioId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "TipoEnvioId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NumeroVersion",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "EnvioManual",
+				"type": "bit"
+			},
+			{
+				"name": "Periodo",
+				"type": "varchar"
+			},
+			{
+				"name": "RutEmpleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EstadoDeclaracionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CantidadInformados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "QueryDeclaracionSii",
+				"type": "varchar"
+			},
+			{
+				"name": "CantidadRegistros",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FileSize",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaEnvio",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ResponseCode",
+				"type": "varchar"
+			},
+			{
+				"name": "ResponseOk",
+				"type": "bit"
+			},
+			{
+				"name": "ResponseStatus",
+				"type": "varchar"
+			},
+			{
+				"name": "ResponseId",
+				"type": "varchar"
+			},
+			{
+				"name": "ResponseTimestamp",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "FechaRespuesta",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EstadoEnvioSII"
+		}
+	}
+}
