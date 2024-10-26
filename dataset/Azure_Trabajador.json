@@ -1,0 +1,60 @@
+{
+	"name": "Azure_Trabajador",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Rut",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Dv",
+				"type": "char"
+			},
+			{
+				"name": "ApellidoPaterno",
+				"type": "varchar"
+			},
+			{
+				"name": "ApellidoMaterno",
+				"type": "varchar"
+			},
+			{
+				"name": "Nombres",
+				"type": "varchar"
+			},
+			{
+				"name": "Sexo",
+				"type": "char"
+			},
+			{
+				"name": "Nacionalidad",
+				"type": "char"
+			},
+			{
+				"name": "FechaNacimiento",
+				"type": "date"
+			},
+			{
+				"name": "FechaDefuncion",
+				"type": "date"
+			},
+			{
+				"name": "FechaRegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Trabajador"
+		}
+	}
+}
