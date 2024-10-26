@@ -1,0 +1,26 @@
+{
+	"name": "Azure_EstadoPeriodo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "NombreEstadoPeriodo",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EstadoPeriodo"
+		}
+	}
+}
