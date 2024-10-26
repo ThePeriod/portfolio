@@ -1,0 +1,40 @@
+{
+	"name": "Azure_Formulario",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CantidadTrabajadores",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UserAgent",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnviadoSII",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Formulario"
+		}
+	}
+}
