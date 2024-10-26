@@ -1,0 +1,157 @@
+{
+	"name": "AWS_Descuentos",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CotizacionObligatoriaPrevisional",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CotizacionObligatoriaSalud",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CotizacionVoluntariaSalud",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CotizacionAfcTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CotizacionExtranjeroSeguridadSocial",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DepositoConvenidoAnual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AhorroPrevisionalVoluntarioIndA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AhorroPrevisionalVoluntarioIndB",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AhorroPrevisionalVoluntarioColA",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AhorroPrevisionalVoluntarioColB",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ImpuestoRetenidoRemuneraciones",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ImpuestoRetenidoIndeminizaciones",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MayorRetencionImpuestosTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ImpuestoRetenidoReliquidacionRemuneracion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DiferenciaImpuestoReliquidacionRemuneracion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CreditoSocialCcaf",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CuotaViviendaEducacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CreditoCooperativasAhorro",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OtrosDescuentosAutorizadosTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CotizacionAdicionalTrabajoPesado",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DonacionesCulturalesRecontruccion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OtrosDescuentos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PensionAlimento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DescuentoMujerCasada",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DescuentoAnticipoPrestamo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RebajaZona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RetencionPrestamo",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Descuentos"
+		}
+	}
+}
