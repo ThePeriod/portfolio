@@ -53,8 +53,7 @@
 									"name": "Nombre",
 									"type": "varchar"
 								}
-							},
-							null
+							}
 						],
 						"typeConversion": true,
 						"typeConversionSettings": {
