@@ -1,0 +1,51 @@
+{
+	"name": "Azure_Empleador",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Rut",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Dv",
+				"type": "char"
+			},
+			{
+				"name": "Nombre",
+				"type": "varchar"
+			},
+			{
+				"name": "TipoPerfil",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Prioridad",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "FechaRegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Empleador"
+		}
+	}
+}
