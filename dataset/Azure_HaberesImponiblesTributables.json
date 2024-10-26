@@ -1,0 +1,147 @@
+{
+	"name": "Azure_HaberesImponiblesTributables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Sueldo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sobresueldo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ComisionMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SemanaCorridaMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ParticipacionMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GratificacionMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RecargoDiaDomingo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionVariableVacaciones",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionVariableClausura",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Aguinaldo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BonosOtrasRemuneracionesFijas",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tratos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BonosOtrasRemuneracionesVariables",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EjercicioOpcionNoPactadaContrato",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BeneficiosEnEspecie",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionesBimestrales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionesTrimestrales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionesCuatrimestrales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionesSemestrales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionesAnuales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ParticipacionAnual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GratificacionAnual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OtrasRemuneracionesSuperioresUnMes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PagoPorHorasTrabajoSindical",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SueldoEmpresarial",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "HaberesImponiblesTributables"
+		}
+	}
+}
