@@ -1,0 +1,97 @@
+{
+	"name": "Azure_Totales",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "TotalHaberes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalHaberesImponiblesTributables",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalHaberesImponiblesNoTributables",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalHaberesNoImponiblesNoTributables",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalHaberesNoImponiblesTributables",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalDescuentos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalDescuentosImpuestosRemuneracion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalDescuentosImpuestosIndemnizacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalDescuentosCotizacionTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalOtrosDescuentos",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalAportesEmpleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalLiquido",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalIndemnizaciones",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalIndemnizacionesTributables",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TotalIndemnizacionesNoTributables",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Totales"
+		}
+	}
+}
