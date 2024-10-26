@@ -1,0 +1,27 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "Azure2AWSMigration"
+		},
+		"AmazonRdsForSqlServer1_password": {
+			"value": ""
+		},
+		"AmazonRdsForSqlServer1_properties_typeProperties_server": {
+			"value": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
+		},
+		"AmazonRdsForSqlServer1_properties_typeProperties_database": {
+			"value": "lre_prod_db"
+		},
+		"AmazonRdsForSqlServer1_properties_typeProperties_userName": {
+			"value": "admin"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "sql-db-lre-prod.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "LibroRemuneraciones"
+		}
+	}
+}

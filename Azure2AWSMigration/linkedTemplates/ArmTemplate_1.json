@@ -1,0 +1,709 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Azure2AWSMigration"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_EstadoDeclaraciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NombreEstado",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EstadoDeclaraciones"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_EstadoEnvioSII')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "EnvioId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "TipoEnvioId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NumeroVersion",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "EnvioManual",
+						"type": "bit"
+					},
+					{
+						"name": "Periodo",
+						"type": "varchar"
+					},
+					{
+						"name": "RutEmpleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EstadoDeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CantidadInformados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "QueryDeclaracionSii",
+						"type": "varchar"
+					},
+					{
+						"name": "CantidadRegistros",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FileSize",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaEnvio",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ResponseCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ResponseOk",
+						"type": "bit"
+					},
+					{
+						"name": "ResponseStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "ResponseId",
+						"type": "varchar"
+					},
+					{
+						"name": "ResponseTimestamp",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "FechaRespuesta",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EstadoEnvioSII"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_EstadoPeriodo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "NombreEstadoPeriodo",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EstadoPeriodo"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_Excepciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Artefacto",
+						"type": "varchar"
+					},
+					{
+						"name": "Fecha",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Excepcion",
+						"type": "varchar"
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CantidadInformados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EstadoDeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RutEmpleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TipoPerfil",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "JsonLiquidaciones",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Excepciones"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_Formulario')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CantidadTrabajadores",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UserAgent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnviadoSII",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Formulario"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_HaberesImponiblesNoTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "SubsidioIncapacidadLaboral",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BecaEstudio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GratificacionZona",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OtrosIngresosNoConstitutivos",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesImponiblesNoTributables"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_HaberesImponiblesTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Sueldo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Sobresueldo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ComisionMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SemanaCorridaMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ParticipacionMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GratificacionMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RecargoDiaDomingo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionVariableVacaciones",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionVariableClausura",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Aguinaldo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BonosOtrasRemuneracionesFijas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tratos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BonosOtrasRemuneracionesVariables",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EjercicioOpcionNoPactadaContrato",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BeneficiosEnEspecie",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesBimestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesTrimestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesCuatrimestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesSemestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesAnuales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ParticipacionAnual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GratificacionAnual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OtrasRemuneracionesSuperioresUnMes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PagoPorHorasTrabajoSindical",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SueldoEmpresarial",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesImponiblesTributables"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_HaberesNoImponiblesNoTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ColacionTotalMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MovilizacionTotalMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ViaticoTotalMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionPerdidaCajaTotal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionDesgasteHerramientaTotal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionFamiliarLegalTotal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GastosCausaTrabajo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GastosCambioResidencia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SalaCuna",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionTrabajoDistanciaTeletrabajo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DepositoConvenido",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AlojamientoPorRazonesLaborales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionTraslacion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionFeriadoLegal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionAnnosServicio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionSustitutivaAvisoPrevio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionFueroMaternal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionTodoEvento",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesNoImponiblesNoTributables"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_HaberesNoImponiblesTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "IndemnizacionVoluntariaTributable",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionContractualTributable",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesNoImponiblesTributables"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_ImpuestoRenta')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ImpuestoRenta"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Azure_Ips')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ips"
+				}
+			},
+			"dependsOn": []
+		}
+	]
+}
