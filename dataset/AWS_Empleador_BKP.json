@@ -1,0 +1,51 @@
+{
+	"name": "AWS_Empleador_BKP",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Rut",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Dv",
+				"type": "char"
+			},
+			{
+				"name": "Nombre",
+				"type": "varchar"
+			},
+			{
+				"name": "TipoPerfil",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "Prioridad",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "FechaRegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Empleador_BKP"
+		}
+	}
+}
