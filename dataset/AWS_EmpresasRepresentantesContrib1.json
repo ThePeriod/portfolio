@@ -1,0 +1,27 @@
+{
+	"name": "AWS_EmpresasRepresentantesContrib1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "RutEmpresa",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RutRepresentante",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EmpresasRepresentantesContrib1"
+		}
+	}
+}
