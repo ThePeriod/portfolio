@@ -1,0 +1,53 @@
+{
+	"name": "Azure_AportesEmpleador",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "AfcEmpleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SeguroAccidenteTrabajoSanna",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionTodoEvento",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AdicionalTrabajoPesado",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SeguroInvalidezSobrevivencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AhorroPrevisionalVoluntarioColectivo",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "AportesEmpleador"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

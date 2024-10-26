@@ -1,0 +1,41 @@
+{
+	"name": "Azure_CuotaSindical",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "IdOrganizacionSindical",
+				"type": "varchar"
+			},
+			{
+				"name": "CuotaSindical",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RemuneracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Glosa",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CuotaSindical"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

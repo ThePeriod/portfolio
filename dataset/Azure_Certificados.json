@@ -1,0 +1,61 @@
+{
+	"name": "Azure_Certificados",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "EmpleadorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaEmision",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "SerieDocumental",
+				"type": "varchar"
+			},
+			{
+				"name": "IdentificadorExpediente",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ArchivoBase64",
+				"type": "varchar"
+			},
+			{
+				"name": "EstadoCertificado",
+				"type": "varchar"
+			},
+			{
+				"name": "TipoCertificadoId",
+				"type": "smallint",
+				"precision": 5
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Certificados"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

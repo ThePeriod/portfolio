@@ -1,0 +1,15 @@
+{
+	"name": "Azure2AWSMigration",
+	"location": "brazilsouth",
+	"identity": {
+		"type": "SystemAssigned,UserAssigned",
+		"principalId": "be52301f-434f-45d0-a5ac-aeca7548b70f",
+		"tenantId": "2d55c762-c477-4390-bb75-5adbde0a92fc",
+		"userAssignedIdentities": {
+			"/subscriptions/3f7ca611-455f-41ca-b1d3-7dc4384d323a/resourcegroups/ocp4azu-sj2sl-rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/ocp4azu-sj2sl-identity": {
+				"clientId": "ce8381c4-a151-4d43-a8c2-4e060193ce3f",
+				"principalId": "2966417c-36e5-4335-b7e4-7a70778bb90a"
+			}
+		}
+	}
+}

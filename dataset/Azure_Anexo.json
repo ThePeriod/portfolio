@@ -1,0 +1,35 @@
+{
+	"name": "Azure_Anexo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Glosa",
+				"type": "varchar"
+			},
+			{
+				"name": "Value",
+				"type": "varchar"
+			},
+			{
+				"name": "FechaAnexo",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Anexo"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

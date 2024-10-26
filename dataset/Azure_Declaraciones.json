@@ -1,0 +1,53 @@
+{
+	"name": "Azure_Declaraciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "EstadoDeclaracionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "PeriodoId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "EmpleadorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaPresentacion",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "CantidadInformados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DeclaranteId",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Declaraciones"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
