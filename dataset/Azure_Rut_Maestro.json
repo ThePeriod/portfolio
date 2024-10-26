@@ -1,0 +1,40 @@
+{
+	"name": "Azure_Rut_Maestro",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Rut",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Procesado",
+				"type": "bit"
+			},
+			{
+				"name": "FechaUltimoProcesamiento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "ProcesadoDB",
+				"type": "bit"
+			},
+			{
+				"name": "EnMaestro",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Rut_Maestro"
+		}
+	}
+}
