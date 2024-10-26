@@ -1,0 +1,30 @@
+{
+	"name": "Azure_TipoEnvioSII",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tipo",
+				"type": "varchar"
+			},
+			{
+				"name": "Descripcion",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TipoEnvioSII"
+		}
+	}
+}
