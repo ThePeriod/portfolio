@@ -1,0 +1,27 @@
+{
+	"name": "Azure_EmpresasRepresentantesContrib1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "RutEmpresa",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RutRepresentante",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EmpresasRepresentantesContrib1"
+		}
+	}
+}
