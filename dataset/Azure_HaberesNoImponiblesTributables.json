@@ -1,0 +1,32 @@
+{
+	"name": "Azure_HaberesNoImponiblesTributables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "IndemnizacionVoluntariaTributable",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionContractualTributable",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "HaberesNoImponiblesTributables"
+		}
+	}
+}
