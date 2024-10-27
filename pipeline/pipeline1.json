@@ -1043,7 +1043,100 @@
 				]
 			},
 			{
-				"name": "Comuna_copy1",
+				"name": "CsvDeclaracion",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Comuna",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBatchSize": 1000,
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "glosa",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "glosa",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "declaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "declaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_CsvDeclaracion",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_CsvDeclaracion",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Comuna_copy1_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -1074,25 +1167,37 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "Nombre",
+									"name": "glosa",
 									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "Nombre",
+									"name": "glosa",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "declaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "declaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							}
 						],
@@ -1105,13 +1210,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Comuna",
+						"referenceName": "Azure_CsvDeclaracion",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Comuna",
+						"referenceName": "AWS_CsvDeclaracion",
 						"type": "DatasetReference"
 					}
 				]
