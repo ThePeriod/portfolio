@@ -5755,7 +5755,543 @@
 				]
 			},
 			{
-				"name": "TipoCertificado_copy1",
+				"name": "LRE_Hacienda",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "TipoCertificado",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "ID LRE",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ID LRE",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "Rut trabajador(1101)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rut trabajador(1101)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DV trabajador",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "DV trabajador",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Nacionalidad",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Nacionalidad",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "FechadeNacimiento",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechadeNacimiento",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaDefuncion",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaDefuncion",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Fecharegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "Fecharegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaTermino",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaTermino",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CausalTerminoContratoId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CausalTerminoContratoId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Causaltermino",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Causaltermino",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Rut Empleador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rut Empleador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DV Empleador",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "DV Empleador",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes(5201)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes(5201)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes imponibles y tributables(5210)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes imponibles y tributables(5210)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes no imponibles y tributables(5240)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes no imponibles y tributables(5240)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes imponibles no tributables(5220)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes imponibles no tributables(5220)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes no imponibles y no tributables(5230)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes no imponibles y no tributables(5230)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total indemnizaciones no tributables(5565)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total indemnizaciones no tributables(5565)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total líquido(5501)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total líquido(5501)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Código tipo de jornada(1107)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Código tipo de jornada(1107)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaDeInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaDeInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Tramo asignación familiar(1114)",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Tramo asignación familiar(1114)",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro cargas familiares legales autorizadas(1111)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro cargas familiares legales autorizadas(1111)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro de cargas familiares maternales(1112)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro de cargas familiares maternales(1112)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro de cargas familiares invalidez(1113)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro de cargas familiares invalidez(1113)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro días trabajados en el mes(1115)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro días trabajados en el mes(1115)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AFC(1151)",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "AFC(1151)",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Mes",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Mes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre Jornada",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Nombre Jornada",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Descripcion",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Descripcion",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Codigo Tramo Asignación",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Codigo Tramo Asignación",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Glosa Tramo Asignación",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Glosa Tramo Asignación",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sueldo(2101)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sueldo(2101)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Sobresueldo(2102)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sobresueldo(2102)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Comisiones(2103)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Comisiones(2103)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gratificación mens(2106)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gratificación mens(2106)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aguinaldo(2110)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aguinaldo(2110)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gratificación anual(2122)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gratificación anual(2122)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure__LRE_Hacienda",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_LRE_Hacienda",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "LRE_Hacienda_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -5773,7 +6309,7 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlServerSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -5784,26 +6320,482 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Id",
-									"type": "Int16",
-									"physicalType": "smallint"
+									"name": "ID LRE",
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
-									"name": "Id",
-									"type": "Int16",
-									"physicalType": "smallint"
+									"name": "ID LRE",
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "Nombre",
+									"name": "Rut trabajador(1101)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rut trabajador(1101)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DV trabajador",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "DV trabajador",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Nacionalidad",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Nacionalidad",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "FechadeNacimiento",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechadeNacimiento",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaDefuncion",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaDefuncion",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Fecharegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "Fecharegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaTermino",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaTermino",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CausalTerminoContratoId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CausalTerminoContratoId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Causaltermino",
 									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "Nombre",
+									"name": "Causaltermino",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Rut Empleador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rut Empleador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DV Empleador",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "DV Empleador",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes(5201)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes(5201)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes imponibles y tributables(5210)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes imponibles y tributables(5210)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes no imponibles y tributables(5240)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes no imponibles y tributables(5240)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes imponibles no tributables(5220)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes imponibles no tributables(5220)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes no imponibles y no tributables(5230)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes no imponibles y no tributables(5230)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total indemnizaciones no tributables(5565)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total indemnizaciones no tributables(5565)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total líquido(5501)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total líquido(5501)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Código tipo de jornada(1107)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Código tipo de jornada(1107)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaDeInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaDeInicio",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "Tramo asignación familiar(1114)",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Tramo asignación familiar(1114)",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro cargas familiares legales autorizadas(1111)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro cargas familiares legales autorizadas(1111)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro de cargas familiares maternales(1112)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro de cargas familiares maternales(1112)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro de cargas familiares invalidez(1113)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro de cargas familiares invalidez(1113)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nro días trabajados en el mes(1115)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Nro días trabajados en el mes(1115)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AFC(1151)",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "AFC(1151)",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Mes",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Mes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre Jornada",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Nombre Jornada",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Descripcion",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Descripcion",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Codigo Tramo Asignación",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Codigo Tramo Asignación",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Glosa Tramo Asignación",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Glosa Tramo Asignación",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Sueldo(2101)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sueldo(2101)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Sobresueldo(2102)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sobresueldo(2102)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Comisiones(2103)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Comisiones(2103)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gratificación mens(2106)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gratificación mens(2106)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aguinaldo(2110)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aguinaldo(2110)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gratificación anual(2122)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gratificación anual(2122)",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
@@ -5816,13 +6808,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_TipoEnvioSII",
+						"referenceName": "Azure__LRE_Hacienda",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "Azure_TipoCertificado",
+						"referenceName": "AWS_LRE_Hacienda",
 						"type": "DatasetReference"
 					}
 				]
