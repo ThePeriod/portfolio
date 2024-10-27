@@ -6291,7 +6291,7 @@
 				]
 			},
 			{
-				"name": "LRE_Hacienda_copy1",
+				"name": "BKP_Declaraciones",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -6808,13 +6808,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure__LRE_Hacienda",
+						"referenceName": "Azure_Declaraciones_BKP",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_LRE_Hacienda",
+						"referenceName": "AWS_Declaraciones_BKP",
 						"type": "DatasetReference"
 					}
 				]
