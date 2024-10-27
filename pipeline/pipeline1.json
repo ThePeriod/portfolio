@@ -2847,9 +2847,16 @@
 				]
 			},
 			{
-				"name": "HINoTributables",
+				"name": "HI_NoTributables",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Formulario",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -2951,6 +2958,367 @@
 				"outputs": [
 					{
 						"referenceName": "AWS_HaberesImponiblesNoTributables",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "HI_NoTributables_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "Sueldo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sueldo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Sobresueldo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sobresueldo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ComisionMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ComisionMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "SemanaCorridaMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SemanaCorridaMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ParticipacionMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ParticipacionMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GratificacionMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "GratificacionMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RecargoDiaDomingo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RecargoDiaDomingo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionVariableVacaciones",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionVariableVacaciones",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionVariableClausura",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionVariableClausura",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aguinaldo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aguinaldo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BonosOtrasRemuneracionesFijas",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BonosOtrasRemuneracionesFijas",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Tratos",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Tratos",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BonosOtrasRemuneracionesVariables",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BonosOtrasRemuneracionesVariables",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "EjercicioOpcionNoPactadaContrato",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EjercicioOpcionNoPactadaContrato",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "BeneficiosEnEspecie",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "BeneficiosEnEspecie",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionesBimestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionesBimestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionesTrimestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionesTrimestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionesCuatrimestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionesCuatrimestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionesSemestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionesSemestrales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RemuneracionesAnuales",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RemuneracionesAnuales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ParticipacionAnual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ParticipacionAnual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GratificacionAnual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "GratificacionAnual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "OtrasRemuneracionesSuperioresUnMes",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "OtrasRemuneracionesSuperioresUnMes",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PagoPorHorasTrabajoSindical",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PagoPorHorasTrabajoSindical",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "SueldoEmpresarial",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SueldoEmpresarial",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_HaberesImponiblesTributables",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_HaberesImponiblesTributables",
 						"type": "DatasetReference"
 					}
 				]
