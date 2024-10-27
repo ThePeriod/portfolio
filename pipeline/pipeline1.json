@@ -5203,7 +5203,123 @@
 				]
 			},
 			{
-				"name": "ResumenDeclaracion_copy1",
+				"name": "ResumenFilas",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "ResumenDeclaracion",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "Esquema",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Esquema",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tabla",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tabla",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Filas",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Filas",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_ResumenFilas",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_ResumenFilas",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ResumenFilas_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -5244,122 +5360,50 @@
 							},
 							{
 								"source": {
-									"name": "CsvDeclaracionId",
+									"name": "Esquema",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Esquema",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Tabla",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Tabla",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Filas",
 									"type": "Int64",
 									"physicalType": "bigint"
 								},
 								"sink": {
-									"name": "CsvDeclaracionId",
+									"name": "Filas",
 									"type": "Int64",
 									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "DeclaracionId",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								},
 								"sink": {
-									"name": "DeclaracionId",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
-									"name": "PeriodoAgno",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "PeriodoAgno",
-									"type": "Int16",
-									"physicalType": "smallint"
-								}
-							},
-							{
-								"source": {
-									"name": "PeriodoMes",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "PeriodoMes",
-									"type": "Int16",
-									"physicalType": "smallint"
-								}
-							},
-							{
-								"source": {
-									"name": "RutEmpleador",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "RutEmpleador",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "RutTrabajador",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "RutTrabajador",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "LargoLinea",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "LargoLinea",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "EsLineaVacia",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "EsLineaVacia",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "EnRemuneraciones",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "EnRemuneraciones",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "EnFormulario",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "EnFormulario",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -5372,13 +5416,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_ResumenFilas",
+						"referenceName": "Azure_RUT_ETL",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_ResumenDeclaracion",
+						"referenceName": "AWS_ResumenFilas",
 						"type": "DatasetReference"
 					}
 				]
