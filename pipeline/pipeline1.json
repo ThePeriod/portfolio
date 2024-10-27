@@ -4223,7 +4223,123 @@
 				]
 			},
 			{
-				"name": "OrganismoAdministrador_copy1",
+				"name": "Periodo",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "OrganismoAdministrador",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "EstadoPeriodoId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "EstadoPeriodoId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "EmpleadorId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EmpleadorId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Mes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "Mes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_Periodo",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_Periodo",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Periodo_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -4253,25 +4369,61 @@
 							{
 								"source": {
 									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "EstadoPeriodoId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "EstadoPeriodoId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "EmpleadorId",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Id",
+									"name": "EmpleadorId",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "Nombre",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "Mes",
+									"type": "Int16",
+									"physicalType": "smallint"
 								},
 								"sink": {
-									"name": "Nombre",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "Mes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Anno",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
@@ -4284,13 +4436,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Periodo",
+						"referenceName": "Azure_Region",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_OrganismoAdministrador",
+						"referenceName": "AWS_Periodo",
 						"type": "DatasetReference"
 					}
 				]
