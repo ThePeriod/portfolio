@@ -1136,9 +1136,16 @@
 				]
 			},
 			{
-				"name": "Comuna_copy1_copy1",
+				"name": "CuotaSindical",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "CsvDeclaracion",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -1210,13 +1217,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_CsvDeclaracion",
+						"referenceName": "Azure_CuotaSindical",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_CsvDeclaracion",
+						"referenceName": "AWS_CuotaSindical",
 						"type": "DatasetReference"
 					}
 				]
