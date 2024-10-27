@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource",
+						"type": "AzureSqlSource",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -65,7 +65,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AWS_Anexo",
+						"referenceName": "Azure_Anexo",
 						"type": "DatasetReference"
 					}
 				],
@@ -77,9 +77,16 @@
 				]
 			},
 			{
-				"name": "Anexo_copy1",
+				"name": "AportesEmpleador",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Anexo",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -90,7 +97,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "SqlServerSource",
+						"type": "AzureSqlSource",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -139,13 +146,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "AWS_Anexo",
+						"referenceName": "Azure_AportesEmpleador",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Anexo",
+						"referenceName": "AWS_AportesEmpleador",
 						"type": "DatasetReference"
 					}
 				]
