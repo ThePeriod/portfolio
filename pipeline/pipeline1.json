@@ -1940,7 +1940,7 @@
 				]
 			},
 			{
-				"name": "DiscapacidadPensionado_copy1",
+				"name": "Empleador",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -1981,6 +1981,30 @@
 							},
 							{
 								"source": {
+									"name": "Rut",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rut",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Dv",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "Dv",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
 									"name": "Nombre",
 									"type": "String",
 									"physicalType": "varchar"
@@ -1989,6 +2013,42 @@
 									"name": "Nombre",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPerfil",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "TipoPerfil",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "Prioridad",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "Prioridad",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -2007,7 +2067,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_DiscapacidadPensionado",
+						"referenceName": "AWS_Empleador",
 						"type": "DatasetReference"
 					}
 				]
