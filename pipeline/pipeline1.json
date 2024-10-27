@@ -34,25 +34,49 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "int",
-									"physicalType": "int",
-									"precision": 10
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "int",
-									"precision": 10
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "Nombre",
-									"type": "varchar",
+									"name": "Glosa",
+									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "Nombre",
-									"type": "varchar"
+									"name": "Glosa",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Value",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Value",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaAnexo",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaAnexo",
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							}
 						],
@@ -320,9 +344,16 @@
 				]
 			},
 			{
-				"name": "Ccaf_copy1",
+				"name": "CertificadoCumplimiento",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Ccaf",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
