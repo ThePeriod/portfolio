@@ -2080,7 +2080,7 @@
 				]
 			},
 			{
-				"name": "Empleador_copy1",
+				"name": "Empresas",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -2109,86 +2109,26 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Id",
+									"name": "RutEmpresa",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "Rut",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "Rut",
+									"name": "RutEmpresa",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "Dv",
-									"type": "String",
-									"physicalType": "char"
+									"name": "RutRepresentante",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Dv",
-									"type": "String",
-									"physicalType": "char"
-								}
-							},
-							{
-								"source": {
-									"name": "Nombre",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "Nombre",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TipoPerfil",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "TipoPerfil",
-									"type": "Int16",
-									"physicalType": "smallint"
-								}
-							},
-							{
-								"source": {
-									"name": "Prioridad",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "Prioridad",
-									"type": "Int16",
-									"physicalType": "smallint"
-								}
-							},
-							{
-								"source": {
-									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								},
-								"sink": {
-									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"name": "RutRepresentante",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
@@ -2201,13 +2141,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Empleador",
+						"referenceName": "Azure_EmpresasRepresentantesContrib1",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Empleador",
+						"referenceName": "AWS_EmpresasRepresentantesContrib1",
 						"type": "DatasetReference"
 					}
 				]
