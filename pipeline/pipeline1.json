@@ -1253,7 +1253,7 @@
 				]
 			},
 			{
-				"name": "CuotaSindical_copy1",
+				"name": "Declaraciones",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -1295,26 +1295,74 @@
 							},
 							{
 								"source": {
-									"name": "glosa",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "EstadoDeclaracionId",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "glosa",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "EstadoDeclaracionId",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "declaracionId",
+									"name": "PeriodoId",
 									"type": "Int64",
 									"physicalType": "bigint"
 								},
 								"sink": {
-									"name": "declaracionId",
+									"name": "PeriodoId",
 									"type": "Int64",
 									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "EmpleadorId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EmpleadorId",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaPresentacion",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "FechaPresentacion",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								}
+							},
+							{
+								"source": {
+									"name": "CantidadInformados",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CantidadInformados",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DeclaranteId",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "DeclaranteId",
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
 						],
@@ -1327,13 +1375,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_CuotaSindical",
+						"referenceName": "Azure_Declaraciones",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_CuotaSindical",
+						"referenceName": "AWS_Declaraciones",
 						"type": "DatasetReference"
 					}
 				]
