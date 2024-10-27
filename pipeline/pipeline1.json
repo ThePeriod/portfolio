@@ -3707,9 +3707,16 @@
 				]
 			},
 			{
-				"name": "HNI_Tributables_copy1",
+				"name": "ImpuestoRenta",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "HNI_Tributables",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -3737,37 +3744,25 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
-									"name": "IndemnizacionVoluntariaTributable",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "IndemnizacionVoluntariaTributable",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "IndemnizacionContractualTributable",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "IndemnizacionContractualTributable",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
 						],
@@ -3780,13 +3775,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_HaberesNoImponiblesTributables",
+						"referenceName": "Azure_ImpuestoRenta",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_HaberesNoImponiblesTributables",
+						"referenceName": "AWS_ImpuestoRenta",
 						"type": "DatasetReference"
 					}
 				]
