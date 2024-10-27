@@ -2965,7 +2965,14 @@
 			{
 				"name": "HI_Tributables",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "HI_NoTributables",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -3319,6 +3326,283 @@
 				"outputs": [
 					{
 						"referenceName": "AWS_HaberesImponiblesTributables",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "HI_Tributables_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "ColacionTotalMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ColacionTotalMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "MovilizacionTotalMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MovilizacionTotalMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ViaticoTotalMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ViaticoTotalMensual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AsignacionPerdidaCajaTotal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AsignacionPerdidaCajaTotal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AsignacionDesgasteHerramientaTotal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AsignacionDesgasteHerramientaTotal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AsignacionFamiliarLegalTotal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AsignacionFamiliarLegalTotal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GastosCausaTrabajo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "GastosCausaTrabajo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "GastosCambioResidencia",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "GastosCambioResidencia",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "SalaCuna",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SalaCuna",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AsignacionTrabajoDistanciaTeletrabajo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AsignacionTrabajoDistanciaTeletrabajo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DepositoConvenido",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DepositoConvenido",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AlojamientoPorRazonesLaborales",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AlojamientoPorRazonesLaborales",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AsignacionTraslacion",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AsignacionTraslacion",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IndemnizacionFeriadoLegal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IndemnizacionFeriadoLegal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IndemnizacionAnnosServicio",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IndemnizacionAnnosServicio",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IndemnizacionSustitutivaAvisoPrevio",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IndemnizacionSustitutivaAvisoPrevio",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IndemnizacionFueroMaternal",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IndemnizacionFueroMaternal",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IndemnizacionTodoEvento",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IndemnizacionTodoEvento",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_HaberesNoImponiblesNoTributables",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_HaberesNoImponiblesNoTributables",
 						"type": "DatasetReference"
 					}
 				]
