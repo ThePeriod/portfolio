@@ -1,0 +1,26 @@
+{
+	"name": "AWS_EstadoDeclaraciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "NombreEstado",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EstadoDeclaraciones"
+		}
+	}
+}
