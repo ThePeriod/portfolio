@@ -1,0 +1,203 @@
+{
+	"name": "AWS_LRE_Hacienda",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "ID LRE",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Rut trabajador(1101)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DV trabajador",
+				"type": "char"
+			},
+			{
+				"name": "Nacionalidad",
+				"type": "char"
+			},
+			{
+				"name": "FechadeNacimiento",
+				"type": "date"
+			},
+			{
+				"name": "FechaDefuncion",
+				"type": "date"
+			},
+			{
+				"name": "Fecharegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "FechaInicio",
+				"type": "date"
+			},
+			{
+				"name": "FechaTermino",
+				"type": "date"
+			},
+			{
+				"name": "CausalTerminoContratoId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Causaltermino",
+				"type": "varchar"
+			},
+			{
+				"name": "Rut Empleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DV Empleador",
+				"type": "char"
+			},
+			{
+				"name": "Total haberes(5201)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes imponibles y tributables(5210)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes no imponibles y tributables(5240)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes imponibles no tributables(5220)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes no imponibles y no tributables(5230)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total indemnizaciones no tributables(5565)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total líquido(5501)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Código tipo de jornada(1107)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaDeInicio",
+				"type": "date"
+			},
+			{
+				"name": "Tramo asignación familiar(1114)",
+				"type": "char"
+			},
+			{
+				"name": "Nro cargas familiares legales autorizadas(1111)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Nro de cargas familiares maternales(1112)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Nro de cargas familiares invalidez(1113)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Nro días trabajados en el mes(1115)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AFC(1151)",
+				"type": "bit"
+			},
+			{
+				"name": "Anno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Nombre Jornada",
+				"type": "varchar"
+			},
+			{
+				"name": "Descripcion",
+				"type": "varchar"
+			},
+			{
+				"name": "Codigo Tramo Asignación",
+				"type": "char"
+			},
+			{
+				"name": "Glosa Tramo Asignación",
+				"type": "varchar"
+			},
+			{
+				"name": "Sueldo(2101)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sobresueldo(2102)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Comisiones(2103)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Gratificación mens(2106)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Aguinaldo(2110)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Gratificación anual(2122)",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "_LRE _Hacienda"
+		}
+	}
+}
