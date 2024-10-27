@@ -6461,85 +6461,85 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "EstadoDeclaracionId",
+									"name": "Rut",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "EstadoDeclaracionId",
+									"name": "Rut",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "PeriodoId",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"name": "Dv",
+									"type": "String",
+									"physicalType": "char"
 								},
 								"sink": {
-									"name": "PeriodoId",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"name": "Dv",
+									"type": "String",
+									"physicalType": "char"
 								}
 							},
 							{
 								"source": {
-									"name": "EmpleadorId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "EmpleadorId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "FechaPresentacion",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								},
-								"sink": {
-									"name": "FechaPresentacion",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"source": {
-									"name": "CantidadInformados",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "CantidadInformados",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "DeclaranteId",
+									"name": "Nombre",
 									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "DeclaranteId",
+									"name": "Nombre",
 									"type": "String",
 									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "TipoPerfil",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "TipoPerfil",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "Prioridad",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "Prioridad",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
+								},
+								"sink": {
+									"name": "FechaRegistro",
+									"type": "DateTime",
+									"physicalType": "datetime"
 								}
 							}
 						],
@@ -6558,7 +6558,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Declaraciones_BKP",
+						"referenceName": "AWS_Empleador_BKP",
 						"type": "DatasetReference"
 					}
 				]
