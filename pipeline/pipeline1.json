@@ -2847,7 +2847,7 @@
 				]
 			},
 			{
-				"name": "Formulario_copy1",
+				"name": "HINoTributables",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -2877,61 +2877,61 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "DeclaracionId",
-									"type": "Int64",
-									"physicalType": "bigint"
-								},
-								"sink": {
-									"name": "DeclaracionId",
 									"type": "Int64",
 									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "CantidadTrabajadores",
+									"name": "SubsidioIncapacidadLaboral",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "CantidadTrabajadores",
+									"name": "SubsidioIncapacidadLaboral",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "UserAgent",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"name": "BecaEstudio",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "UserAgent",
-									"type": "String",
-									"physicalType": "nvarchar"
+									"name": "BecaEstudio",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "EnviadoSII",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"name": "GratificacionZona",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "EnviadoSII",
-									"type": "Boolean",
-									"physicalType": "bit"
+									"name": "GratificacionZona",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "OtrosIngresosNoConstitutivos",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "OtrosIngresosNoConstitutivos",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
@@ -2944,13 +2944,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Formulario",
+						"referenceName": "Azure_HaberesImponiblesNoTributables",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Formulario",
+						"referenceName": "AWS_HaberesImponiblesNoTributables",
 						"type": "DatasetReference"
 					}
 				]
