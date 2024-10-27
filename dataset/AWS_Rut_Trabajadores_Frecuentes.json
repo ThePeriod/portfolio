@@ -1,0 +1,32 @@
+{
+	"name": "AWS_Rut_Trabajadores_Frecuentes",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "RutTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Procesado",
+				"type": "bit"
+			},
+			{
+				"name": "FechaUltimoProcesamiento",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Rut_Trabajadores_Frecuentes"
+		}
+	}
+}
