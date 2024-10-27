@@ -1,0 +1,112 @@
+{
+	"name": "AWS_HaberesNoImponiblesNoTributables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ColacionTotalMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "MovilizacionTotalMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ViaticoTotalMensual",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsignacionPerdidaCajaTotal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsignacionDesgasteHerramientaTotal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsignacionFamiliarLegalTotal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GastosCausaTrabajo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GastosCambioResidencia",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SalaCuna",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsignacionTrabajoDistanciaTeletrabajo",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DepositoConvenido",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AlojamientoPorRazonesLaborales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AsignacionTraslacion",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionFeriadoLegal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionAnnosServicio",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionSustitutivaAvisoPrevio",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionFueroMaternal",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionTodoEvento",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "HaberesNoImponiblesNoTributables"
+		}
+	}
+}

@@ -1,0 +1,176 @@
+{
+	"name": "AWS_Remuneraciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "RutTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EmpleadorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TipoJornadaId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaInicio",
+				"type": "date"
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "TramoAsigFamiliarId",
+				"type": "char"
+			},
+			{
+				"name": "IpsId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "SaludId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AfpId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CcafId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OrgAdministradorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TipoDiscPenId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RegionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ComunaId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TipoImpuestoRentaId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CargasFamiliaresLegales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CargasFamiliaresMaternales",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CargasFamiliaresInvalidas",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DiasTrabajadosMes",
+				"type": "decimal",
+				"precision": 4,
+				"scale": 2
+			},
+			{
+				"name": "DiasLicenciasMes",
+				"type": "decimal",
+				"precision": 4,
+				"scale": 2
+			},
+			{
+				"name": "DiasVacacionesMes",
+				"type": "decimal",
+				"precision": 4,
+				"scale": 2
+			},
+			{
+				"name": "Afc",
+				"type": "bit"
+			},
+			{
+				"name": "Apvi",
+				"type": "bit"
+			},
+			{
+				"name": "IndemnizacionSustitutivaTodoEvento",
+				"type": "bit"
+			},
+			{
+				"name": "TasaIndemnizacionTodoEvento",
+				"type": "decimal",
+				"precision": 18,
+				"scale": 2
+			},
+			{
+				"name": "Apvc",
+				"type": "bit"
+			},
+			{
+				"name": "ExtranjeroExencionCotizacionPrevisionales",
+				"type": "bit"
+			},
+			{
+				"name": "SubsidioTrabajadorJoven",
+				"type": "bit"
+			},
+			{
+				"name": "PensionadoPorVejez",
+				"type": "bit"
+			},
+			{
+				"name": "PuestoTrabajoPesado",
+				"type": "varchar"
+			},
+			{
+				"name": "Anno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mes",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Remuneraciones"
+		}
+	}
+}

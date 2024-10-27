@@ -1,0 +1,36 @@
+{
+	"name": "AWS_Observaciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ReglaObservacionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "ReglaObservacionGlosa",
+				"type": "varchar"
+			},
+			{
+				"name": "RemuneracionId",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Observaciones"
+		}
+	}
+}

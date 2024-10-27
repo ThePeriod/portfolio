@@ -1,0 +1,42 @@
+{
+	"name": "AWS_HaberesImponiblesNoTributables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SubsidioIncapacidadLaboral",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "BecaEstudio",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "GratificacionZona",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "OtrosIngresosNoConstitutivos",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "HaberesImponiblesNoTributables"
+		}
+	}
+}

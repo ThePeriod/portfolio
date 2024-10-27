@@ -1,0 +1,69 @@
+{
+	"name": "AWS_ResumenDeclaracion",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CsvDeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "PeriodoAgno",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "PeriodoMes",
+				"type": "smallint",
+				"precision": 5
+			},
+			{
+				"name": "RutEmpleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RutTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "LargoLinea",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EsLineaVacia",
+				"type": "bit"
+			},
+			{
+				"name": "EnRemuneraciones",
+				"type": "bit"
+			},
+			{
+				"name": "EnFormulario",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "ResumenDeclaracion"
+		}
+	}
+}

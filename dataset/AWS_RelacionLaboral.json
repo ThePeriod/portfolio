@@ -1,0 +1,45 @@
+{
+	"name": "AWS_RelacionLaboral",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "RutTrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EmpleadorId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "FechaInicio",
+				"type": "date"
+			},
+			{
+				"name": "FechaTermino",
+				"type": "date"
+			},
+			{
+				"name": "CausalTerminoContratoId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AnexoId",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "RelacionLaboral"
+		}
+	}
+}

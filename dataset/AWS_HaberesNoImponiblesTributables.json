@@ -1,0 +1,32 @@
+{
+	"name": "AWS_HaberesNoImponiblesTributables",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "IndemnizacionVoluntariaTributable",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionContractualTributable",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "HaberesNoImponiblesTributables"
+		}
+	}
+}
