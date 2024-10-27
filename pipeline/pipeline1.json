@@ -1396,14 +1396,7 @@
 			{
 				"name": "EstadoDeclaraciones",
 				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "Declaraciones",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
+				"dependsOn": [],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -1494,7 +1487,6 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBatchSize": 1000,
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -1506,25 +1498,337 @@
 							{
 								"source": {
 									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CotizacionObligatoriaPrevisional",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Id",
+									"name": "CotizacionObligatoriaPrevisional",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "NombreEstado",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "CotizacionObligatoriaSalud",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "NombreEstado",
-									"type": "String",
-									"physicalType": "varchar"
+									"name": "CotizacionObligatoriaSalud",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CotizacionVoluntariaSalud",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CotizacionVoluntariaSalud",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CotizacionAfcTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CotizacionAfcTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CotizacionExtranjeroSeguridadSocial",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CotizacionExtranjeroSeguridadSocial",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DepositoConvenidoAnual",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DepositoConvenidoAnual",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AhorroPrevisionalVoluntarioIndA",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AhorroPrevisionalVoluntarioIndA",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AhorroPrevisionalVoluntarioIndB",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AhorroPrevisionalVoluntarioIndB",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AhorroPrevisionalVoluntarioColA",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AhorroPrevisionalVoluntarioColA",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AhorroPrevisionalVoluntarioColB",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AhorroPrevisionalVoluntarioColB",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ImpuestoRetenidoRemuneraciones",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ImpuestoRetenidoRemuneraciones",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ImpuestoRetenidoIndeminizaciones",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ImpuestoRetenidoIndeminizaciones",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "MayorRetencionImpuestosTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "MayorRetencionImpuestosTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "ImpuestoRetenidoReliquidacionRemuneracion",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "ImpuestoRetenidoReliquidacionRemuneracion",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DiferenciaImpuestoReliquidacionRemuneracion",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DiferenciaImpuestoReliquidacionRemuneracion",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CreditoSocialCcaf",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CreditoSocialCcaf",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CuotaViviendaEducacion",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CuotaViviendaEducacion",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CreditoCooperativasAhorro",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CreditoCooperativasAhorro",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "OtrosDescuentosAutorizadosTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "OtrosDescuentosAutorizadosTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "CotizacionAdicionalTrabajoPesado",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "CotizacionAdicionalTrabajoPesado",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DonacionesCulturalesRecontruccion",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DonacionesCulturalesRecontruccion",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "OtrosDescuentos",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "OtrosDescuentos",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "PensionAlimento",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "PensionAlimento",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DescuentoMujerCasada",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DescuentoMujerCasada",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DescuentoAnticipoPrestamo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "DescuentoAnticipoPrestamo",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RebajaZona",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RebajaZona",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RetencionPrestamo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RetencionPrestamo",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
@@ -1537,13 +1841,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_EstadoDeclaraciones",
+						"referenceName": "Azure_Descuentos",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_EstadoDeclaraciones",
+						"referenceName": "AWS_Descuentos",
 						"type": "DatasetReference"
 					}
 				]
