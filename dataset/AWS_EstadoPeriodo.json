@@ -1,0 +1,26 @@
+{
+	"name": "AWS_EstadoPeriodo",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "NombreEstadoPeriodo",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "EstadoPeriodo"
+		}
+	}
+}
