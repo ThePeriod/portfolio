@@ -5319,7 +5319,7 @@
 				]
 			},
 			{
-				"name": "ResumenFilas_copy1",
+				"name": "RUT_ETL",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -5348,62 +5348,14 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"name": "RUT",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
-									"name": "Esquema",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "Esquema",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "Tabla",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "Tabla",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "Filas",
-									"type": "Int64",
-									"physicalType": "bigint"
-								},
-								"sink": {
-									"name": "Filas",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
-									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								},
-								"sink": {
-									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"name": "RUT",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
@@ -5422,7 +5374,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_ResumenFilas",
+						"referenceName": "AWS_RUT_ETL",
 						"type": "DatasetReference"
 					}
 				]
