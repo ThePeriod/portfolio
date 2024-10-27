@@ -1,0 +1,40 @@
+{
+	"name": "AWS_Formulario",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CantidadTrabajadores",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "UserAgent",
+				"type": "nvarchar"
+			},
+			{
+				"name": "EnviadoSII",
+				"type": "bit"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Formulario"
+		}
+	}
+}
