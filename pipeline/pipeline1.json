@@ -962,7 +962,88 @@
 				]
 			},
 			{
-				"name": "Certificados_copy1",
+				"name": "Comuna",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Certificados",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBatchSize": 1000,
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_Comuna",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_Comuna",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Comuna_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -1004,98 +1085,14 @@
 							},
 							{
 								"source": {
-									"name": "DeclaracionId",
-									"type": "Int64",
-									"physicalType": "bigint"
-								},
-								"sink": {
-									"name": "DeclaracionId",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
-									"name": "EmpleadorId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "EmpleadorId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "FechaEmision",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								},
-								"sink": {
-									"name": "FechaEmision",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								}
-							},
-							{
-								"source": {
-									"name": "SerieDocumental",
+									"name": "Nombre",
 									"type": "String",
 									"physicalType": "varchar"
 								},
 								"sink": {
-									"name": "SerieDocumental",
+									"name": "Nombre",
 									"type": "String",
 									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "IdentificadorExpediente",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "IdentificadorExpediente",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "ArchivoBase64",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "ArchivoBase64",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "EstadoCertificado",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "EstadoCertificado",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TipoCertificadoId",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "TipoCertificadoId",
-									"type": "Int16",
-									"physicalType": "smallint"
 								}
 							}
 						],
@@ -1108,13 +1105,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Certificados",
+						"referenceName": "Azure_Comuna",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Certificados",
+						"referenceName": "AWS_Comuna",
 						"type": "DatasetReference"
 					}
 				]
