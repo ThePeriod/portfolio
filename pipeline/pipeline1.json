@@ -4339,7 +4339,87 @@
 				]
 			},
 			{
-				"name": "Periodo_copy1",
+				"name": "Region",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Periodo",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Nombre",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_Region",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_Region",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Region_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -4368,26 +4448,14 @@
 						"mappings": [
 							{
 								"source": {
-									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"name": "RutTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
-								}
-							},
-							{
-								"source": {
-									"name": "EstadoPeriodoId",
-									"type": "Byte",
-									"physicalType": "tinyint"
-								},
-								"sink": {
-									"name": "EstadoPeriodoId",
-									"type": "Byte",
-									"physicalType": "tinyint"
+									"name": "RutTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							},
 							{
@@ -4404,26 +4472,50 @@
 							},
 							{
 								"source": {
-									"name": "Mes",
-									"type": "Int16",
-									"physicalType": "smallint"
+									"name": "FechaInicio",
+									"type": "DateTime",
+									"physicalType": "date"
 								},
 								"sink": {
-									"name": "Mes",
-									"type": "Int16",
-									"physicalType": "smallint"
+									"name": "FechaInicio",
+									"type": "DateTime",
+									"physicalType": "date"
 								}
 							},
 							{
 								"source": {
-									"name": "Anno",
+									"name": "FechaTermino",
+									"type": "DateTime",
+									"physicalType": "date"
+								},
+								"sink": {
+									"name": "FechaTermino",
+									"type": "DateTime",
+									"physicalType": "date"
+								}
+							},
+							{
+								"source": {
+									"name": "CausalTerminoContratoId",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Anno",
+									"name": "CausalTerminoContratoId",
 									"type": "Int32",
 									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AnexoId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "AnexoId",
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							}
 						],
@@ -4436,13 +4528,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Region",
+						"referenceName": "Azure_RelacionLaboral",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Periodo",
+						"referenceName": "AWS_RelacionLaboral",
 						"type": "DatasetReference"
 					}
 				]
