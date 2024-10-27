@@ -8,11 +8,8 @@
 		"AWS_RDS_SQLServer_password": {
 			"value": ""
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"value": "sql-db-lre-prod.database.windows.net"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"value": "LibroRemuneraciones"
+		"SqlServer_on_AWS_password": {
+			"value": ""
 		},
 		"AWS_RDS_SQLServer_properties_typeProperties_server": {
 			"value": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
@@ -21,6 +18,21 @@
 			"value": "lre_prod_db"
 		},
 		"AWS_RDS_SQLServer_properties_typeProperties_userName": {
+			"value": "migration_user"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"value": "sql-db-lre-prod.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"value": "LibroRemuneraciones"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_server": {
+			"value": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_database": {
+			"value": "lre_prod_db"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_userName": {
 			"value": "migration_user"
 		},
 		"containerUri": {

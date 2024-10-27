@@ -1,0 +1,312 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "Azure2AWSMigration"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_LRE_Hacienda')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID LRE",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Rut trabajador(1101)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DV trabajador",
+						"type": "char"
+					},
+					{
+						"name": "Nacionalidad",
+						"type": "char"
+					},
+					{
+						"name": "FechadeNacimiento",
+						"type": "date"
+					},
+					{
+						"name": "FechaDefuncion",
+						"type": "date"
+					},
+					{
+						"name": "Fecharegistro",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "FechaInicio",
+						"type": "date"
+					},
+					{
+						"name": "FechaTermino",
+						"type": "date"
+					},
+					{
+						"name": "CausalTerminoContratoId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Causaltermino",
+						"type": "varchar"
+					},
+					{
+						"name": "Rut Empleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DV Empleador",
+						"type": "char"
+					},
+					{
+						"name": "Total haberes(5201)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes imponibles y tributables(5210)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes no imponibles y tributables(5240)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes imponibles no tributables(5220)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes no imponibles y no tributables(5230)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total indemnizaciones no tributables(5565)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total líquido(5501)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Código tipo de jornada(1107)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaDeInicio",
+						"type": "date"
+					},
+					{
+						"name": "Tramo asignación familiar(1114)",
+						"type": "char"
+					},
+					{
+						"name": "Nro cargas familiares legales autorizadas(1111)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nro de cargas familiares maternales(1112)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nro de cargas familiares invalidez(1113)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nro días trabajados en el mes(1115)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AFC(1151)",
+						"type": "bit"
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre Jornada",
+						"type": "varchar"
+					},
+					{
+						"name": "Descripcion",
+						"type": "varchar"
+					},
+					{
+						"name": "Codigo Tramo Asignación",
+						"type": "char"
+					},
+					{
+						"name": "Glosa Tramo Asignación",
+						"type": "varchar"
+					},
+					{
+						"name": "Sueldo(2101)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Sobresueldo(2102)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Comisiones(2103)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Gratificación mens(2106)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Aguinaldo(2110)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Gratificación anual(2122)",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "_LRE _Hacienda"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "AFP",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBatchSize": 1000,
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Id",
+											"type": "int",
+											"physicalType": "int",
+											"precision": 10
+										},
+										"sink": {
+											"name": "Id",
+											"type": "int",
+											"precision": 10
+										}
+									},
+									{
+										"source": {
+											"name": "Nombre",
+											"type": "varchar",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nombre",
+											"type": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Azure_AFP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AWS_AFP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": []
+		}
+	]
+}

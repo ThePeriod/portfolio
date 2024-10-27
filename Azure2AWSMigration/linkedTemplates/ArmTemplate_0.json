@@ -11,13 +11,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AWS_RDS_SQLServer'"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "sql-db-lre-prod.database.windows.net"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "LibroRemuneraciones"
+		"SqlServer_on_AWS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer_on_AWS'"
 		},
 		"AWS_RDS_SQLServer_properties_typeProperties_server": {
 			"type": "string",
@@ -30,29 +26,32 @@
 		"AWS_RDS_SQLServer_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "migration_user"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-db-lre-prod.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "LibroRemuneraciones"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "lre_prod_db"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "migration_user"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
-		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"server": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]",
-					"database": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SystemAssignedManagedIdentity"
-				}
-			},
-			"dependsOn": []
-		},
 		{
 			"name": "[concat(parameters('factoryName'), '/AWS_RDS_SQLServer')]",
 			"type": "Microsoft.DataFactory/factories/linkedServices",
@@ -76,16 +75,55 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_AFP')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SystemAssignedManagedIdentity"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer_on_AWS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer_on_AWS_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer_on_AWS_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer_on_AWS_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer_on_AWS_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_AFP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -103,20 +141,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Anexo')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Anexo')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -142,20 +180,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_AportesEmpleador')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_AportesEmpleador')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -199,20 +237,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_CausalTerminoContrato')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_CausalTerminoContrato')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -230,20 +268,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Ccaf')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Ccaf')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -261,20 +299,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_CertificadoCumplimiento')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_CertificadoCumplimiento')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -423,20 +461,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Certificados')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Certificados')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -488,20 +526,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Comuna')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Comuna')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -519,20 +557,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_CsvDeclaracion')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_CsvDeclaracion')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -555,20 +593,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_CuotaSindical')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_CuotaSindical')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -600,20 +638,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Declaraciones')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Declaraciones')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -657,20 +695,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Declaraciones_BKP')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Declaraciones_BKP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -714,20 +752,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Descuentos')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Descuentos')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -876,20 +914,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_DiscapacidadPensionado')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_DiscapacidadPensionado')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -907,20 +945,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Empleador')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Empleador')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -963,20 +1001,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_Empleador_BKP')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_Empleador_BKP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -1019,20 +1057,20 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/Azure_EmpresasRepresentantesContrib1')]",
+			"name": "[concat(parameters('factoryName'), '/AWS_EmpresasRepresentantesContrib1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AzureSqlTable",
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "RutEmpresa",
@@ -1051,38 +1089,7 @@
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/Azure_EstadoDeclaraciones')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "AzureSqlDatabase1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "AzureSqlTable",
-				"schema": [
-					{
-						"name": "Id",
-						"type": "int",
-						"precision": 10
-					},
-					{
-						"name": "NombreEstado",
-						"type": "varchar"
-					}
-				],
-				"typeProperties": {
-					"schema": "dbo",
-					"table": "EstadoDeclaraciones"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AzureSqlDatabase1')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		}
 	]

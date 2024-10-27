@@ -11,13 +11,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AWS_RDS_SQLServer'"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "sql-db-lre-prod.database.windows.net"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "LibroRemuneraciones"
+		"SqlServer_on_AWS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer_on_AWS'"
 		},
 		"AWS_RDS_SQLServer_properties_typeProperties_server": {
 			"type": "string",
@@ -28,6 +24,26 @@
 			"defaultValue": "lre_prod_db"
 		},
 		"AWS_RDS_SQLServer_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "migration_user"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-db-lre-prod.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "LibroRemuneraciones"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "lre_prod_db"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "migration_user"
 		},
@@ -61,11 +77,8 @@
 					"AWS_RDS_SQLServer_password": {
 						"value": "[parameters('AWS_RDS_SQLServer_password')]"
 					},
-					"AzureSqlDatabase1_properties_typeProperties_server": {
-						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
-					},
-					"AzureSqlDatabase1_properties_typeProperties_database": {
-						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					"SqlServer_on_AWS_password": {
+						"value": "[parameters('SqlServer_on_AWS_password')]"
 					},
 					"AWS_RDS_SQLServer_properties_typeProperties_server": {
 						"value": "[parameters('AWS_RDS_SQLServer_properties_typeProperties_server')]"
@@ -75,6 +88,21 @@
 					},
 					"AWS_RDS_SQLServer_properties_typeProperties_userName": {
 						"value": "[parameters('AWS_RDS_SQLServer_properties_typeProperties_userName')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_server": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]"
+					},
+					"AzureSqlDatabase1_properties_typeProperties_database": {
+						"value": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]"
+					},
+					"SqlServer_on_AWS_properties_typeProperties_server": {
+						"value": "[parameters('SqlServer_on_AWS_properties_typeProperties_server')]"
+					},
+					"SqlServer_on_AWS_properties_typeProperties_database": {
+						"value": "[parameters('SqlServer_on_AWS_properties_typeProperties_database')]"
+					},
+					"SqlServer_on_AWS_properties_typeProperties_userName": {
+						"value": "[parameters('SqlServer_on_AWS_properties_typeProperties_userName')]"
 					}
 				}
 			},
@@ -118,6 +146,66 @@
 			},
 			"dependsOn": [
 				"[resourceId('Microsoft.Resources/deployments', 'Azure2AWSMigration_ArmTemplate_1')]"
+			]
+		},
+		{
+			"name": "Azure2AWSMigration_ArmTemplate_3",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_3.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Azure2AWSMigration_ArmTemplate_2')]"
+			]
+		},
+		{
+			"name": "Azure2AWSMigration_ArmTemplate_4",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_4.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Azure2AWSMigration_ArmTemplate_3')]"
+			]
+		},
+		{
+			"name": "Azure2AWSMigration_ArmTemplate_5",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_5.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'Azure2AWSMigration_ArmTemplate_4')]"
 			]
 		}
 	]

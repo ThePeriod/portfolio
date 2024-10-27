@@ -11,13 +11,9 @@
 			"type": "secureString",
 			"metadata": "Secure string for 'password' of 'AWS_RDS_SQLServer'"
 		},
-		"AzureSqlDatabase1_properties_typeProperties_server": {
-			"type": "string",
-			"defaultValue": "sql-db-lre-prod.database.windows.net"
-		},
-		"AzureSqlDatabase1_properties_typeProperties_database": {
-			"type": "string",
-			"defaultValue": "LibroRemuneraciones"
+		"SqlServer_on_AWS_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'SqlServer_on_AWS'"
 		},
 		"AWS_RDS_SQLServer_properties_typeProperties_server": {
 			"type": "string",
@@ -30,12 +26,2505 @@
 		"AWS_RDS_SQLServer_properties_typeProperties_userName": {
 			"type": "string",
 			"defaultValue": "migration_user"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "sql-db-lre-prod.database.windows.net"
+		},
+		"AzureSqlDatabase1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "LibroRemuneraciones"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_server": {
+			"type": "string",
+			"defaultValue": "database-lre.ctggwg62oziy.sa-east-1.rds.amazonaws.com"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "lre_prod_db"
+		},
+		"SqlServer_on_AWS_properties_typeProperties_userName": {
+			"type": "string",
+			"defaultValue": "migration_user"
 		}
 	},
 	"variables": {
 		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
 	},
 	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/pipeline1')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"activities": [
+					{
+						"name": "AFP",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.12:00:00",
+							"retry": 0,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "AzureSqlSource",
+								"queryTimeout": "02:00:00",
+								"partitionOption": "None"
+							},
+							"sink": {
+								"type": "SqlServerSink",
+								"writeBatchSize": 1000,
+								"writeBehavior": "insert",
+								"sqlWriterUseTableLock": false
+							},
+							"enableStaging": false,
+							"enableSkipIncompatibleRow": true,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Id",
+											"type": "int",
+											"physicalType": "int",
+											"precision": 10
+										},
+										"sink": {
+											"name": "Id",
+											"type": "int",
+											"precision": 10
+										}
+									},
+									{
+										"source": {
+											"name": "Nombre",
+											"type": "varchar",
+											"physicalType": "varchar"
+										},
+										"sink": {
+											"name": "Nombre",
+											"type": "varchar"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "Azure_AFP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "AWS_AFP",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/Azure_AFP')]",
+				"[concat(variables('factoryId'), '/datasets/AWS_AFP')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_AFP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Afp"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Anexo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Glosa",
+						"type": "varchar"
+					},
+					{
+						"name": "Value",
+						"type": "varchar"
+					},
+					{
+						"name": "FechaAnexo",
+						"type": "date"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Anexo"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_AportesEmpleador')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "AfcEmpleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeguroAccidenteTrabajoSanna",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionTodoEvento",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AdicionalTrabajoPesado",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SeguroInvalidezSobrevivencia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AhorroPrevisionalVoluntarioColectivo",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "AportesEmpleador"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_CausalTerminoContrato')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CausalTerminoContrato"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Ccaf')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ccaf"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_CertificadoCumplimiento')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EsRectificacion",
+						"type": "bit"
+					},
+					{
+						"name": "TotalIntentos",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "FechaPrimerEnvio",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "FechaPresentacion",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Mes",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Anno",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "FechaGeneracion",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Rut",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Dv",
+						"type": "char"
+					},
+					{
+						"name": "RazonSocial",
+						"type": "varchar"
+					},
+					{
+						"name": "CantidadTrabajadores",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Haberes5210",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Haberes5220",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Haberes5230",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Haberes5240",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Haberes5201",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Descuentos5361",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Descuentos5362",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Descuentos5341",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Descuentos5302",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Descuentos5301",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Otros5410",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Otros5502",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Otros5564",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Otros5565",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Otros5501",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CertificadoCumplimiento"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Certificados')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaEmision",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "SerieDocumental",
+						"type": "varchar"
+					},
+					{
+						"name": "IdentificadorExpediente",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ArchivoBase64",
+						"type": "varchar"
+					},
+					{
+						"name": "EstadoCertificado",
+						"type": "varchar"
+					},
+					{
+						"name": "TipoCertificadoId",
+						"type": "smallint",
+						"precision": 5
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Certificados"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Comuna')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Comuna"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_CsvDeclaracion')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "glosa",
+						"type": "varchar"
+					},
+					{
+						"name": "declaracionId",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CsvDeclaracion"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_CuotaSindical')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "IdOrganizacionSindical",
+						"type": "varchar"
+					},
+					{
+						"name": "CuotaSindical",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Glosa",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "CuotaSindical"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Declaraciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EstadoDeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PeriodoId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaPresentacion",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CantidadInformados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DeclaranteId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Declaraciones"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Declaraciones_BKP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EstadoDeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PeriodoId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaPresentacion",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "CantidadInformados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DeclaranteId",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Declaraciones_BKP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Descuentos')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CotizacionObligatoriaPrevisional",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CotizacionObligatoriaSalud",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CotizacionVoluntariaSalud",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CotizacionAfcTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CotizacionExtranjeroSeguridadSocial",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DepositoConvenidoAnual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AhorroPrevisionalVoluntarioIndA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AhorroPrevisionalVoluntarioIndB",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AhorroPrevisionalVoluntarioColA",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AhorroPrevisionalVoluntarioColB",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ImpuestoRetenidoRemuneraciones",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ImpuestoRetenidoIndeminizaciones",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MayorRetencionImpuestosTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ImpuestoRetenidoReliquidacionRemuneracion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DiferenciaImpuestoReliquidacionRemuneracion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CreditoSocialCcaf",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CuotaViviendaEducacion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CreditoCooperativasAhorro",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OtrosDescuentosAutorizadosTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CotizacionAdicionalTrabajoPesado",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DonacionesCulturalesRecontruccion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OtrosDescuentos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PensionAlimento",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DescuentoMujerCasada",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DescuentoAnticipoPrestamo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RebajaZona",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RetencionPrestamo",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Descuentos"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_DiscapacidadPensionado')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "DiscapacidadPensionado"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Empleador')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Rut",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Dv",
+						"type": "char"
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					},
+					{
+						"name": "TipoPerfil",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Prioridad",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "FechaRegistro",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Empleador"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Empleador_BKP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Rut",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Dv",
+						"type": "char"
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					},
+					{
+						"name": "TipoPerfil",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Prioridad",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "FechaRegistro",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Empleador_BKP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_EmpresasRepresentantesContrib1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "RutEmpresa",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RutRepresentante",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EmpresasRepresentantesContrib1"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_EstadoDeclaraciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NombreEstado",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EstadoDeclaraciones"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_EstadoEnvioSII')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EnvioId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "TipoEnvioId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "NumeroVersion",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "EnvioManual",
+						"type": "bit"
+					},
+					{
+						"name": "Periodo",
+						"type": "varchar"
+					},
+					{
+						"name": "RutEmpleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EstadoDeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CantidadInformados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "QueryDeclaracionSii",
+						"type": "varchar"
+					},
+					{
+						"name": "CantidadRegistros",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FileSize",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaEnvio",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ResponseCode",
+						"type": "varchar"
+					},
+					{
+						"name": "ResponseOk",
+						"type": "bit"
+					},
+					{
+						"name": "ResponseStatus",
+						"type": "varchar"
+					},
+					{
+						"name": "ResponseId",
+						"type": "varchar"
+					},
+					{
+						"name": "ResponseTimestamp",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "FechaRespuesta",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EstadoEnvioSII"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_EstadoPeriodo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "NombreEstadoPeriodo",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "EstadoPeriodo"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Excepciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Artefacto",
+						"type": "varchar"
+					},
+					{
+						"name": "Fecha",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "Excepcion",
+						"type": "varchar"
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CantidadInformados",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EstadoDeclaracionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RutEmpleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TipoPerfil",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "JsonLiquidaciones",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Excepciones"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Formulario')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CantidadTrabajadores",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "UserAgent",
+						"type": "nvarchar"
+					},
+					{
+						"name": "EnviadoSII",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Formulario"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_HaberesImponiblesNoTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "SubsidioIncapacidadLaboral",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BecaEstudio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GratificacionZona",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OtrosIngresosNoConstitutivos",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesImponiblesNoTributables"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_HaberesImponiblesTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Sueldo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Sobresueldo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ComisionMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SemanaCorridaMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ParticipacionMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GratificacionMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RecargoDiaDomingo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionVariableVacaciones",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionVariableClausura",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Aguinaldo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BonosOtrasRemuneracionesFijas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Tratos",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BonosOtrasRemuneracionesVariables",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EjercicioOpcionNoPactadaContrato",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "BeneficiosEnEspecie",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesBimestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesTrimestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesCuatrimestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesSemestrales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RemuneracionesAnuales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ParticipacionAnual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GratificacionAnual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OtrasRemuneracionesSuperioresUnMes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "PagoPorHorasTrabajoSindical",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SueldoEmpresarial",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesImponiblesTributables"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_HaberesNoImponiblesNoTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ColacionTotalMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "MovilizacionTotalMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ViaticoTotalMensual",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionPerdidaCajaTotal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionDesgasteHerramientaTotal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionFamiliarLegalTotal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GastosCausaTrabajo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "GastosCambioResidencia",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SalaCuna",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionTrabajoDistanciaTeletrabajo",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DepositoConvenido",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AlojamientoPorRazonesLaborales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AsignacionTraslacion",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionFeriadoLegal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionAnnosServicio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionSustitutivaAvisoPrevio",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionFueroMaternal",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionTodoEvento",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesNoImponiblesNoTributables"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_HaberesNoImponiblesTributables')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "IndemnizacionVoluntariaTributable",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "IndemnizacionContractualTributable",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "HaberesNoImponiblesTributables"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_ImpuestoRenta')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ImpuestoRenta"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Ips')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Ips"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Jornada')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					},
+					{
+						"name": "Descripcion",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Jornada"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_NominaTrabajadores')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Trabajadores",
+						"type": "nvarchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "NominaTrabajadores"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Observaciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "ReglaObservacionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ReglaObservacionGlosa",
+						"type": "varchar"
+					},
+					{
+						"name": "RemuneracionId",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Observaciones"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_OrganismoAdministrador')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "OrganismoAdministrador"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Periodo')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EstadoPeriodoId",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Periodo"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Periodo_BKP')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "EstadoPeriodoId",
+						"type": "tinyint",
+						"precision": 3
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Periodo_BKP"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_RUT_ETL')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "RUT",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "RUT_ETL"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Region')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre",
+						"type": "varchar"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Region"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_RelacionLaboral')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "RutTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaInicio",
+						"type": "date"
+					},
+					{
+						"name": "FechaTermino",
+						"type": "date"
+					},
+					{
+						"name": "CausalTerminoContratoId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AnexoId",
+						"type": "bigint",
+						"precision": 19
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "RelacionLaboral"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Remuneraciones')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "RutTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EmpleadorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TipoJornadaId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaInicio",
+						"type": "date"
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "TramoAsigFamiliarId",
+						"type": "char"
+					},
+					{
+						"name": "IpsId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "SaludId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AfpId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CcafId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "OrgAdministradorId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TipoDiscPenId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RegionId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "ComunaId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "TipoImpuestoRentaId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CargasFamiliaresLegales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CargasFamiliaresMaternales",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "CargasFamiliaresInvalidas",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DiasTrabajadosMes",
+						"type": "decimal",
+						"precision": 4,
+						"scale": 2
+					},
+					{
+						"name": "DiasLicenciasMes",
+						"type": "decimal",
+						"precision": 4,
+						"scale": 2
+					},
+					{
+						"name": "DiasVacacionesMes",
+						"type": "decimal",
+						"precision": 4,
+						"scale": 2
+					},
+					{
+						"name": "Afc",
+						"type": "bit"
+					},
+					{
+						"name": "Apvi",
+						"type": "bit"
+					},
+					{
+						"name": "IndemnizacionSustitutivaTodoEvento",
+						"type": "bit"
+					},
+					{
+						"name": "TasaIndemnizacionTodoEvento",
+						"type": "decimal",
+						"precision": 18,
+						"scale": 2
+					},
+					{
+						"name": "Apvc",
+						"type": "bit"
+					},
+					{
+						"name": "ExtranjeroExencionCotizacionPrevisionales",
+						"type": "bit"
+					},
+					{
+						"name": "SubsidioTrabajadorJoven",
+						"type": "bit"
+					},
+					{
+						"name": "PensionadoPorVejez",
+						"type": "bit"
+					},
+					{
+						"name": "PuestoTrabajoPesado",
+						"type": "varchar"
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Remuneraciones"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_ResumenDeclaracion')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "CsvDeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "DeclaracionId",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "PeriodoAgno",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "PeriodoMes",
+						"type": "smallint",
+						"precision": 5
+					},
+					{
+						"name": "RutEmpleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "RutTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "LargoLinea",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "EsLineaVacia",
+						"type": "bit"
+					},
+					{
+						"name": "EnRemuneraciones",
+						"type": "bit"
+					},
+					{
+						"name": "EnFormulario",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ResumenDeclaracion"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_ResumenFilas')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Id",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Esquema",
+						"type": "varchar"
+					},
+					{
+						"name": "Tabla",
+						"type": "varchar"
+					},
+					{
+						"name": "Filas",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "FechaRegistro",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "ResumenFilas"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Rut_Maestro')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "Rut",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Procesado",
+						"type": "bit"
+					},
+					{
+						"name": "FechaUltimoProcesamiento",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "ProcesadoDB",
+						"type": "bit"
+					},
+					{
+						"name": "EnMaestro",
+						"type": "bit"
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Rut_Maestro"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
 		{
 			"name": "[concat(parameters('factoryName'), '/Azure_AFP')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
@@ -1731,23 +4220,6 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
-			"type": "Microsoft.DataFactory/factories/linkedServices",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"annotations": [],
-				"type": "AzureSqlDatabase",
-				"typeProperties": {
-					"server": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]",
-					"database": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]",
-					"encrypt": "mandatory",
-					"trustServerCertificate": true,
-					"authenticationType": "SystemAssignedManagedIdentity"
-				}
-			},
-			"dependsOn": []
-		},
-		{
 			"name": "[concat(parameters('factoryName'), '/Azure_Jornada')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -3207,16 +5679,92 @@
 			"dependsOn": []
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/AWS_AFP')]",
+			"name": "[concat(parameters('factoryName'), '/AzureSqlDatabase1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureSqlDatabase",
+				"typeProperties": {
+					"server": "[parameters('AzureSqlDatabase1_properties_typeProperties_server')]",
+					"database": "[parameters('AzureSqlDatabase1_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SystemAssignedManagedIdentity"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/SqlServer_on_AWS')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SqlServer",
+				"typeProperties": {
+					"server": "[parameters('SqlServer_on_AWS_properties_typeProperties_server')]",
+					"database": "[parameters('SqlServer_on_AWS_properties_typeProperties_database')]",
+					"encrypt": "mandatory",
+					"trustServerCertificate": true,
+					"authenticationType": "SQL",
+					"userName": "[parameters('SqlServer_on_AWS_properties_typeProperties_userName')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('SqlServer_on_AWS_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Rut_Trabajadores_Frecuentes')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"linkedServiceName": {
-					"referenceName": "AWS_RDS_SQLServer",
+					"referenceName": "SqlServer_on_AWS",
 					"type": "LinkedServiceReference"
 				},
 				"annotations": [],
-				"type": "AmazonRdsForSqlServerTable",
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "RutTrabajador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Procesado",
+						"type": "bit"
+					},
+					{
+						"name": "FechaUltimoProcesamiento",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "Rut_Trabajadores_Frecuentes"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_Salud')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
 				"schema": [
 					{
 						"name": "Id",
@@ -3230,11 +5778,219 @@
 				],
 				"typeProperties": {
 					"schema": "dbo",
-					"table": "Afp"
+					"table": "Salud"
 				}
 			},
 			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/AWS_RDS_SQLServer')]"
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AWS_LRE_Hacienda')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "SqlServer_on_AWS",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SqlServerTable",
+				"schema": [
+					{
+						"name": "ID LRE",
+						"type": "bigint",
+						"precision": 19
+					},
+					{
+						"name": "Rut trabajador(1101)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DV trabajador",
+						"type": "char"
+					},
+					{
+						"name": "Nacionalidad",
+						"type": "char"
+					},
+					{
+						"name": "FechadeNacimiento",
+						"type": "date"
+					},
+					{
+						"name": "FechaDefuncion",
+						"type": "date"
+					},
+					{
+						"name": "Fecharegistro",
+						"type": "datetime",
+						"precision": 23,
+						"scale": 3
+					},
+					{
+						"name": "FechaInicio",
+						"type": "date"
+					},
+					{
+						"name": "FechaTermino",
+						"type": "date"
+					},
+					{
+						"name": "CausalTerminoContratoId",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Causaltermino",
+						"type": "varchar"
+					},
+					{
+						"name": "Rut Empleador",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "DV Empleador",
+						"type": "char"
+					},
+					{
+						"name": "Total haberes(5201)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes imponibles y tributables(5210)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes no imponibles y tributables(5240)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes imponibles no tributables(5220)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total haberes no imponibles y no tributables(5230)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total indemnizaciones no tributables(5565)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Total líquido(5501)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Código tipo de jornada(1107)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "FechaDeInicio",
+						"type": "date"
+					},
+					{
+						"name": "Tramo asignación familiar(1114)",
+						"type": "char"
+					},
+					{
+						"name": "Nro cargas familiares legales autorizadas(1111)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nro de cargas familiares maternales(1112)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nro de cargas familiares invalidez(1113)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nro días trabajados en el mes(1115)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "AFC(1151)",
+						"type": "bit"
+					},
+					{
+						"name": "Anno",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Mes",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Nombre Jornada",
+						"type": "varchar"
+					},
+					{
+						"name": "Descripcion",
+						"type": "varchar"
+					},
+					{
+						"name": "Codigo Tramo Asignación",
+						"type": "char"
+					},
+					{
+						"name": "Glosa Tramo Asignación",
+						"type": "varchar"
+					},
+					{
+						"name": "Sueldo(2101)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Sobresueldo(2102)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Comisiones(2103)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Gratificación mens(2106)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Aguinaldo(2110)",
+						"type": "int",
+						"precision": 10
+					},
+					{
+						"name": "Gratificación anual(2122)",
+						"type": "int",
+						"precision": 10
+					}
+				],
+				"typeProperties": {
+					"schema": "dbo",
+					"table": "_LRE _Hacienda"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/SqlServer_on_AWS')]"
 			]
 		}
 	]
