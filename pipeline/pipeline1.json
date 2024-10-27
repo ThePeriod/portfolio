@@ -6571,9 +6571,16 @@
 				]
 			},
 			{
-				"name": "BKP_Empleador_copy1",
+				"name": "BKP_Periodo",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "BKP_Empleador",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -6601,85 +6608,61 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
 									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "EstadoPeriodoId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								},
+								"sink": {
+									"name": "EstadoPeriodoId",
+									"type": "Byte",
+									"physicalType": "tinyint"
+								}
+							},
+							{
+								"source": {
+									"name": "EmpleadorId",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "EmpleadorId",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "Rut",
+									"name": "Mes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "Mes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "Anno",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Rut",
+									"name": "Anno",
 									"type": "Int32",
 									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "Dv",
-									"type": "String",
-									"physicalType": "char"
-								},
-								"sink": {
-									"name": "Dv",
-									"type": "String",
-									"physicalType": "char"
-								}
-							},
-							{
-								"source": {
-									"name": "Nombre",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "Nombre",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "TipoPerfil",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "TipoPerfil",
-									"type": "Int16",
-									"physicalType": "smallint"
-								}
-							},
-							{
-								"source": {
-									"name": "Prioridad",
-									"type": "Int16",
-									"physicalType": "smallint"
-								},
-								"sink": {
-									"name": "Prioridad",
-									"type": "Int16",
-									"physicalType": "smallint"
-								}
-							},
-							{
-								"source": {
-									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
-								},
-								"sink": {
-									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
 								}
 							}
 						],
@@ -6698,7 +6681,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Empleador_BKP",
+						"referenceName": "AWS_Periodo_BKP",
 						"type": "DatasetReference"
 					}
 				]
