@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "AFP",
+				"name": "Anexo",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -16,7 +16,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"source": {
-						"type": "AzureSqlSource",
+						"type": "SqlServerSource",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -65,13 +65,87 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_AFP",
+						"referenceName": "AWS_Anexo",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_AFP",
+						"referenceName": "AWS_Anexo",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "Anexo_copy1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "SqlServerSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBatchSize": 1000,
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "int",
+									"physicalType": "int",
+									"precision": 10
+								},
+								"sink": {
+									"name": "Id",
+									"type": "int",
+									"precision": 10
+								}
+							},
+							{
+								"source": {
+									"name": "Nombre",
+									"type": "varchar",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Nombre",
+									"type": "varchar"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "AWS_Anexo",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_Anexo",
 						"type": "DatasetReference"
 					}
 				]
