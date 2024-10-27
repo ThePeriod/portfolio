@@ -5675,9 +5675,16 @@
 				]
 			},
 			{
-				"name": "Salud_copy1",
+				"name": "TipoCertificado",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "Salud",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -5693,7 +5700,7 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "SqlServerSink",
+						"type": "AzureSqlSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -5705,13 +5712,13 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int16",
+									"physicalType": "smallint"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
+									"type": "Int16",
+									"physicalType": "smallint"
 								}
 							},
 							{
@@ -5736,13 +5743,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_TerminosCondiciones",
+						"referenceName": "Azure_TipoCertificado",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Salud",
+						"referenceName": "Azure_TipoCertificado",
 						"type": "DatasetReference"
 					}
 				]
