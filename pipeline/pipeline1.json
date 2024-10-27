@@ -5015,7 +5015,195 @@
 				]
 			},
 			{
-				"name": "Remuneraciones_copy1",
+				"name": "ResumenDeclaracion",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "Remuneraciones",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"enableSkipIncompatibleRow": true,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "Id",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "CsvDeclaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "CsvDeclaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "DeclaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "DeclaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "PeriodoAgno",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "PeriodoAgno",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "PeriodoMes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								},
+								"sink": {
+									"name": "PeriodoMes",
+									"type": "Int16",
+									"physicalType": "smallint"
+								}
+							},
+							{
+								"source": {
+									"name": "RutEmpleador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RutEmpleador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "RutTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RutTrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "LargoLinea",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "LargoLinea",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "EsLineaVacia",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "EsLineaVacia",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "EnRemuneraciones",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "EnRemuneraciones",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							},
+							{
+								"source": {
+									"name": "EnFormulario",
+									"type": "Boolean",
+									"physicalType": "bit"
+								},
+								"sink": {
+									"name": "EnFormulario",
+									"type": "Boolean",
+									"physicalType": "bit"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_ResumenDeclaracion",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_ResumenDeclaracion",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ResumenDeclaracion_copy1",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -5056,50 +5244,14 @@
 							},
 							{
 								"source": {
-									"name": "RutTrabajador",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "CsvDeclaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
-									"name": "RutTrabajador",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "EmpleadorId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "EmpleadorId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "TipoJornadaId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "TipoJornadaId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "FechaInicio",
-									"type": "DateTime",
-									"physicalType": "date"
-								},
-								"sink": {
-									"name": "FechaInicio",
-									"type": "DateTime",
-									"physicalType": "date"
+									"name": "CsvDeclaracionId",
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
@@ -5116,342 +5268,98 @@
 							},
 							{
 								"source": {
-									"name": "TramoAsigFamiliarId",
-									"type": "String",
-									"physicalType": "char"
+									"name": "PeriodoAgno",
+									"type": "Int16",
+									"physicalType": "smallint"
 								},
 								"sink": {
-									"name": "TramoAsigFamiliarId",
-									"type": "String",
-									"physicalType": "char"
+									"name": "PeriodoAgno",
+									"type": "Int16",
+									"physicalType": "smallint"
 								}
 							},
 							{
 								"source": {
-									"name": "IpsId",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "PeriodoMes",
+									"type": "Int16",
+									"physicalType": "smallint"
 								},
 								"sink": {
-									"name": "IpsId",
-									"type": "Int32",
-									"physicalType": "int"
+									"name": "PeriodoMes",
+									"type": "Int16",
+									"physicalType": "smallint"
 								}
 							},
 							{
 								"source": {
-									"name": "SaludId",
+									"name": "RutEmpleador",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "SaludId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "AfpId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "AfpId",
+									"name": "RutEmpleador",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "CcafId",
+									"name": "RutTrabajador",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "CcafId",
+									"name": "RutTrabajador",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "OrgAdministradorId",
+									"name": "LargoLinea",
 									"type": "Int32",
 									"physicalType": "int"
 								},
 								"sink": {
-									"name": "OrgAdministradorId",
+									"name": "LargoLinea",
 									"type": "Int32",
 									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
-									"name": "TipoDiscPenId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "TipoDiscPenId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "RegionId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "RegionId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "ComunaId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "ComunaId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "TipoImpuestoRentaId",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "TipoImpuestoRentaId",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "CargasFamiliaresLegales",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "CargasFamiliaresLegales",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "CargasFamiliaresMaternales",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "CargasFamiliaresMaternales",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "CargasFamiliaresInvalidas",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "CargasFamiliaresInvalidas",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "DiasTrabajadosMes",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 4
-								},
-								"sink": {
-									"name": "DiasTrabajadosMes",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 4
-								}
-							},
-							{
-								"source": {
-									"name": "DiasLicenciasMes",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 4
-								},
-								"sink": {
-									"name": "DiasLicenciasMes",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 4
-								}
-							},
-							{
-								"source": {
-									"name": "DiasVacacionesMes",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 4
-								},
-								"sink": {
-									"name": "DiasVacacionesMes",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 4
-								}
-							},
-							{
-								"source": {
-									"name": "Afc",
+									"name": "EsLineaVacia",
 									"type": "Boolean",
 									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "Afc",
+									"name": "EsLineaVacia",
 									"type": "Boolean",
 									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "Apvi",
+									"name": "EnRemuneraciones",
 									"type": "Boolean",
 									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "Apvi",
+									"name": "EnRemuneraciones",
 									"type": "Boolean",
 									"physicalType": "bit"
 								}
 							},
 							{
 								"source": {
-									"name": "IndemnizacionSustitutivaTodoEvento",
+									"name": "EnFormulario",
 									"type": "Boolean",
 									"physicalType": "bit"
 								},
 								"sink": {
-									"name": "IndemnizacionSustitutivaTodoEvento",
+									"name": "EnFormulario",
 									"type": "Boolean",
 									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "TasaIndemnizacionTodoEvento",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 18
-								},
-								"sink": {
-									"name": "TasaIndemnizacionTodoEvento",
-									"type": "Decimal",
-									"physicalType": "decimal",
-									"scale": 2,
-									"precision": 18
-								}
-							},
-							{
-								"source": {
-									"name": "Apvc",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "Apvc",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "ExtranjeroExencionCotizacionPrevisionales",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "ExtranjeroExencionCotizacionPrevisionales",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "SubsidioTrabajadorJoven",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "SubsidioTrabajadorJoven",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "PensionadoPorVejez",
-									"type": "Boolean",
-									"physicalType": "bit"
-								},
-								"sink": {
-									"name": "PensionadoPorVejez",
-									"type": "Boolean",
-									"physicalType": "bit"
-								}
-							},
-							{
-								"source": {
-									"name": "PuestoTrabajoPesado",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "PuestoTrabajoPesado",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							},
-							{
-								"source": {
-									"name": "Anno",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "Anno",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "Mes",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "Mes",
-									"type": "Int32",
-									"physicalType": "int"
 								}
 							}
 						],
@@ -5464,13 +5372,13 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_ResumenDeclaracion",
+						"referenceName": "Azure_ResumenFilas",
 						"type": "DatasetReference"
 					}
 				],
 				"outputs": [
 					{
-						"referenceName": "AWS_Remuneraciones",
+						"referenceName": "AWS_ResumenDeclaracion",
 						"type": "DatasetReference"
 					}
 				]
