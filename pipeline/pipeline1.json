@@ -139,25 +139,85 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "int",
-									"physicalType": "int",
-									"precision": 10
+									"type": "Int64",
+									"physicalType": "bigint"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "int",
-									"precision": 10
+									"type": "Int64",
+									"physicalType": "bigint"
 								}
 							},
 							{
 								"source": {
-									"name": "Nombre",
-									"type": "varchar",
-									"physicalType": "varchar"
+									"name": "AfcEmpleador",
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
-									"name": "Nombre",
-									"type": "varchar"
+									"name": "AfcEmpleador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "SeguroAccidenteTrabajoSanna",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SeguroAccidenteTrabajoSanna",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "IndemnizacionTodoEvento",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "IndemnizacionTodoEvento",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AdicionalTrabajoPesado",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AdicionalTrabajoPesado",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "SeguroInvalidezSobrevivencia",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "SeguroInvalidezSobrevivencia",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AhorroPrevisionalVoluntarioColectivo",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AhorroPrevisionalVoluntarioColectivo",
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							}
 						],
