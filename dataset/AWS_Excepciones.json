@@ -1,0 +1,75 @@
+{
+	"name": "AWS_Excepciones",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Artefacto",
+				"type": "varchar"
+			},
+			{
+				"name": "Fecha",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "Excepcion",
+				"type": "varchar"
+			},
+			{
+				"name": "DeclaracionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Anno",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mes",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "CantidadInformados",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "EstadoDeclaracionId",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "RutEmpleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "TipoPerfil",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "JsonLiquidaciones",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "Excepciones"
+		}
+	}
+}
