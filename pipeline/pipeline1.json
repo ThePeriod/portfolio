@@ -5736,7 +5736,7 @@
 				},
 				"inputs": [
 					{
-						"referenceName": "Azure_Salud",
+						"referenceName": "Azure_TerminosCondiciones",
 						"type": "DatasetReference"
 					}
 				],
