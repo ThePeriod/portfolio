@@ -512,87 +512,6 @@
 				]
 			},
 			{
-				"name": "EstadoDeclaraciones",
-				"type": "Copy",
-				"dependsOn": [
-					{
-						"activity": "EmpresasRepresentantesContribuyentes",
-						"dependencyConditions": [
-							"Completed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"source": {
-						"type": "AzureSqlSource",
-						"queryTimeout": "02:00:00",
-						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "SqlServerSink",
-						"writeBatchSize": 1000,
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
-					},
-					"enableStaging": false,
-					"enableSkipIncompatibleRow": true,
-					"translator": {
-						"type": "TabularTranslator",
-						"mappings": [
-							{
-								"source": {
-									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
-								},
-								"sink": {
-									"name": "Id",
-									"type": "Int32",
-									"physicalType": "int"
-								}
-							},
-							{
-								"source": {
-									"name": "NombreEstado",
-									"type": "String",
-									"physicalType": "varchar"
-								},
-								"sink": {
-									"name": "NombreEstado",
-									"type": "String",
-									"physicalType": "varchar"
-								}
-							}
-						],
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "Azure_EstadoDeclaraciones",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AWS_EstadoDeclaraciones",
-						"type": "DatasetReference"
-					}
-				]
-			},
-			{
 				"name": "Descuentos",
 				"type": "Copy",
 				"dependsOn": [
@@ -1289,7 +1208,7 @@
 				"type": "Copy",
 				"dependsOn": [
 					{
-						"activity": "EstadoDeclaraciones",
+						"activity": "EmpresasRepresentantesContribuyentes",
 						"dependencyConditions": [
 							"Completed"
 						]
