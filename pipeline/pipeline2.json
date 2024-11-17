@@ -23,7 +23,6 @@
 					"sink": {
 						"type": "SqlServerSink",
 						"writeBatchSize": 5000,
-						"writeBatchTimeout": "600",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": true
 					},
