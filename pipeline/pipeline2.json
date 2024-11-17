@@ -22,9 +22,10 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"writeBatchSize": 500,
+						"writeBatchSize": 1000,
+						"writeBatchTimeout": "00:30:00",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": true
 					},
 					"enableStaging": false,
 					"enableSkipIncompatibleRow": true,
