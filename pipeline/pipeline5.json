@@ -32,39 +32,56 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int32"
+									"type": "Int32",
+									"physicalType": "int"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int32"
+									"type": "Int32",
+									"physicalType": "int"
 								}
 							},
 							{
 								"source": {
 									"name": "Tipo",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								},
 								"sink": {
 									"name": "Tipo",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							},
 							{
 								"source": {
 									"name": "Descripcion",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								},
 								"sink": {
 									"name": "Descripcion",
-									"type": "String"
+									"type": "String",
+									"physicalType": "varchar"
 								}
 							}
-						]
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "Azure_TipoEnvioSII",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_TipoEnvioSII",
 						"type": "DatasetReference"
 					}
 				]
@@ -93,11 +110,6 @@
 						"type": "AzureSqlSource",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
-					},
-					"sink": {
-						"type": "SqlServerSink",
-						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -180,104 +192,79 @@
 							{
 								"source": {
 									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int64"
 								},
 								"sink": {
 									"name": "Id",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int64"
 								}
 							},
 							{
 								"source": {
 									"name": "Esquema",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Esquema",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "Tabla",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								},
 								"sink": {
 									"name": "Tabla",
-									"type": "String",
-									"physicalType": "varchar"
+									"type": "String"
 								}
 							},
 							{
 								"source": {
 									"name": "FechaMaxima",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "FechaMaxima",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "FechaAnterior",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "FechaAnterior",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								}
 							},
 							{
 								"source": {
 									"name": "DiferenciaFilas",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int64"
 								},
 								"sink": {
 									"name": "DiferenciaFilas",
-									"type": "Int64",
-									"physicalType": "bigint"
+									"type": "Int64"
 								}
 							},
 							{
 								"source": {
 									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								},
 								"sink": {
 									"name": "FechaRegistro",
-									"type": "DateTime",
-									"physicalType": "datetime"
+									"type": "DateTime"
 								}
 							}
-						],
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
+						]
 					}
 				},
 				"inputs": [
 					{
 						"referenceName": "Azure_VariacionDiaria",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "AWS_VariacionDiaria",
 						"type": "DatasetReference"
 					}
 				]

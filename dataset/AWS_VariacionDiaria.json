@@ -1,0 +1,53 @@
+{
+	"name": "AWS_VariacionDiaria",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Esquema",
+				"type": "varchar"
+			},
+			{
+				"name": "Tabla",
+				"type": "varchar"
+			},
+			{
+				"name": "FechaMaxima",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "FechaAnterior",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "DiferenciaFilas",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "FechaRegistro",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "VariacionDiaria"
+		}
+	}
+}
