@@ -1923,7 +1923,14 @@
 			{
 				"name": "tmp_sii_16022023",
 				"type": "Copy",
-				"dependsOn": [],
+				"dependsOn": [
+					{
+						"activity": "tmp_sii_07022024",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
 				"policy": {
 					"timeout": "0.12:00:00",
 					"retry": 0,
@@ -2672,6 +2679,661 @@
 				"outputs": [
 					{
 						"referenceName": "AWS_tmp_sii_16022023",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "tmp_sii_16032022",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "tmp_sii_16022023",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "RutEmpresa",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "RutEmpresa",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DvEmpresa",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "DvEmpresa",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Ruttrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Ruttrabajador",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "DvTrabajador",
+									"type": "String",
+									"physicalType": "char"
+								},
+								"sink": {
+									"name": "DvTrabajador",
+									"type": "String",
+									"physicalType": "char"
+								}
+							},
+							{
+								"source": {
+									"name": "Periodo",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Periodo",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "ID LRE",
+									"type": "Int64",
+									"physicalType": "bigint"
+								},
+								"sink": {
+									"name": "ID LRE",
+									"type": "Int64",
+									"physicalType": "bigint"
+								}
+							},
+							{
+								"source": {
+									"name": "Fecha y hora carga LRE",
+									"type": "String",
+									"physicalType": "varchar"
+								},
+								"sink": {
+									"name": "Fecha y hora carga LRE",
+									"type": "String",
+									"physicalType": "varchar"
+								}
+							},
+							{
+								"source": {
+									"name": "Codigo tipo de jornada(1107)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Codigo tipo de jornada(1107)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Subsidio por incapacidad laboral por licencia medica(2201)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Subsidio por incapacidad laboral por licencia medica(2201)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Beca de estudio(2202)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Beca de estudio(2202)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gratificaciones de zona(2203)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gratificaciones de zona(2203)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Otros ingresos no constitutivos de renta(2204)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Otros ingresos no constitutivos de renta(2204)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Colacion(2301)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Colacion(2301)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Movilizacion(2302)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Movilizacion(2302)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Viaticos(2303)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Viaticos(2303)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Asignacion de perdida de caja(2304)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Asignacion de perdida de caja(2304)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Asignacion de desgaste herramienta(2305)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Asignacion de desgaste herramienta(2305)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gastos por causa del trabajo(2306)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gastos por causa del trabajo(2306)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Gastos por cambio de residencia(2307)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Gastos por cambio de residencia(2307)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Sala cuna(2308)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sala cuna(2308)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Alojamiento por razones de trabajo(2310)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Alojamiento por razones de trabajo(2310)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Asignacion familiar legal(2311)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Asignacion familiar legal(2311)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Asignacion de traslacion(2312)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Asignacion de traslacion(2312)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cotizacion obligatoria previsional (AFP o IPS)(3141)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Cotizacion obligatoria previsional (AFP o IPS)(3141)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cotizacion obligatoria salud 7%(3143)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Cotizacion obligatoria salud 7%(3143)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cotizacion voluntaria para salud(3144)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Cotizacion voluntaria para salud(3144)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cotizaciones tecnico extranjero para seguridad social fuera de Chile(3146)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Cotizaciones tecnico extranjero para seguridad social fuera de Chile(3146)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cotizacion AFC - trabajador(3151)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Cotizacion AFC - trabajador(3151)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Cotizacion adicional trabajo pesado - trabajador(3154)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Cotizacion adicional trabajo pesado - trabajador(3154)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Mayor retencion de impuestos solicitada por el trabajador(3163)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Mayor retencion de impuestos solicitada por el trabajador(3163)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Impuesto retenido por reliquidacion remun. devengadas otros periodos(3164)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Impuesto retenido por reliquidacion remun. devengadas otros periodos(3164)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Diferencia impuesto reliquidacion remun. devengadas en este periodo(3165)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Diferencia impuesto reliquidacion remun. devengadas en este periodo(3165)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "AFC - Aporte empleador(4151)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "AFC - Aporte empleador(4151)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aporte empleador seguro accidentes del trabajo y Ley SANNA(4152)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aporte empleador seguro accidentes del trabajo y Ley SANNA(4152)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aporte adicional trabajo pesado - empleador(4154)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aporte adicional trabajo pesado - empleador(4154)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aporte empleador seguro invalidez y sobrevivencia(4155)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aporte empleador seguro invalidez y sobrevivencia(4155)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "APVC - Aporte Empleador(4157)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "APVC - Aporte Empleador(4157)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes imponibles y tributables(5210)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes imponibles y tributables(5210)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes imponibles no tributables(5220)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes imponibles no tributables(5220)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes no imponibles y tributables(5240)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes no imponibles y tributables(5240)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total descuentos por cotizaciones del trabajador(5341)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total descuentos por cotizaciones del trabajador(5341)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total descuentos impuestos a las remuneraciones(5361)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total descuentos impuestos a las remuneraciones(5361)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total descuentos impuestos por indemnizaciones(5362)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total descuentos impuestos por indemnizaciones(5362)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Tipo impuesto a la renta(1170)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Tipo impuesto a la renta(1170)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Total haberes no imponibles y no tributables(5230)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Total haberes no imponibles y no tributables(5230)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Aporte empleador indemnizacion a todo evento(4131)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Aporte empleador indemnizacion a todo evento(4131)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Retencion prestamos 3%(3170)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Retencion prestamos 3%(3170)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Rebaja zona extrema(3190)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rebaja zona extrema(3190)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Sueldo empresarial(2134)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Sueldo empresarial(2134)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							},
+							{
+								"source": {
+									"name": "Impuesto Retenido por Remuneraciones(3161)",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Impuesto Retenido por Remuneraciones(3161)",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_tmp_sii_16032022",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_tmp_sii_16032022",
 						"type": "DatasetReference"
 					}
 				]
