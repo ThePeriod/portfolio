@@ -21,7 +21,7 @@
 						"partitionOption": "None"
 					},
 					"sink": {
-						"type": "AzureSqlSink",
+						"type": "SqlServerSink",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
@@ -43,7 +43,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "Azure_TerminosCondiciones",
+						"referenceName": "AWS_TerminosCondiciones",
 						"type": "DatasetReference"
 					}
 				]
