@@ -1,0 +1,30 @@
+{
+	"name": "AWS_TramoAsignacionFamiliar",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Codigo",
+				"type": "char"
+			},
+			{
+				"name": "Glosa",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "TramoAsignacionFamiliar"
+		}
+	}
+}
