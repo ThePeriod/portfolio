@@ -1,0 +1,22 @@
+{
+	"name": "AWS_tmp_rut_maestro_personas",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "SqlServer_on_AWS",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SqlServerTable",
+		"schema": [
+			{
+				"name": "Rut",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tmp_rut_maestro_personas"
+		}
+	}
+}
