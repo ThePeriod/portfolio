@@ -1,0 +1,308 @@
+{
+	"name": "Azure_tmp_sii_16022023",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "Rut Empleador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DvEmpresa",
+				"type": "char"
+			},
+			{
+				"name": "Ruttrabajador",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "DvTrabajador",
+				"type": "char"
+			},
+			{
+				"name": "Periodo",
+				"type": "varchar"
+			},
+			{
+				"name": "ID LRE",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Fecha y hora carga LRE",
+				"type": "varchar"
+			},
+			{
+				"name": "Codigo tipo de jornada(1107)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Subsidio por incapacidad laboral por licencia medica(2201)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Beca de estudio(2202)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Gratificaciones de zona(2203)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Otros ingresos no constitutivos de renta(2204)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Colacion(2301)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Movilizacion(2302)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Viaticos(2303)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Asignacion de perdida de caja(2304)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Asignacion de desgaste herramienta(2305)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Gastos por causa del trabajo(2306)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Gastos por cambio de residencia(2307)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sala cuna(2308)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Alojamiento por razones de trabajo(2310)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Asignacion familiar legal(2311)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Asignacion de traslacion(2312)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cotizacion obligatoria previsional (AFP o IPS)(3141)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cotizacion obligatoria salud 7%(3143)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cotizacion voluntaria para salud(3144)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cotizaciones tecnico extranjero para seguridad social fuera de Chile(3146)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cotizacion AFC - trabajador(3151)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Cotizacion adicional trabajo pesado - trabajador(3154)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Mayor retencion de impuestos solicitada por el trabajador(3163)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Impuesto retenido por reliquidacion remun. devengadas otros periodos(3164)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Diferencia impuesto reliquidacion remun. devengadas en este periodo(3165)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "AFC - Aporte empleador(4151)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Aporte empleador seguro accidentes del trabajo y Ley SANNA(4152)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Aporte adicional trabajo pesado - empleador(4154)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Aporte empleador seguro invalidez y sobrevivencia(4155)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "APVC - Aporte Empleador(4157)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes imponibles y tributables(5210)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes imponibles no tributables(5220)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes no imponibles y tributables(5240)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total descuentos por cotizaciones del trabajador(5341)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total descuentos impuestos a las remuneraciones(5361)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total descuentos impuestos por indemnizaciones(5362)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Tipo impuesto a la renta(1170)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Total haberes no imponibles y no tributables(5230)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Aporte empleador indemnizacion a todo evento(4131)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Retencion prestamo clase media 2020 (Ley 21.252)(3166)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Rebaja zona extrema DL 889(3167)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Sueldo empresarial(2161)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Impuesto Retenido por Remuneraciones(3161)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Asignacion Trabajo Distancia Teletrabajo(2309)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "IndemnizacionFeriadoLegal(2313)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Indemnizacion Annos Servicio(2314)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Indemnizacion SustitutivaAviso Previo(2315)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Indemnizacion Fuero Maternal(2316)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Pago indemnización a todo evento(2331)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Deposito convenido hasta UF 900(2347)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Descuento deposito convenido hasta UF 900 anual(3147)",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "Donaciones culturales y de reconstruccion(3184)",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "tmp_sii_16022023"
+		}
+	}
+}
