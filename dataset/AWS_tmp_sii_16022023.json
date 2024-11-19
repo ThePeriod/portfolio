@@ -1,5 +1,5 @@
 {
-	"name": "AWS_tmp_sii_07022024",
+	"name": "AWS_tmp_sii_16022023",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SqlServer_on_AWS",
@@ -302,7 +302,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "tmp_sii_07022024"
+			"table": "tmp_sii_16022023"
 		}
 	}
 }

@@ -1,5 +1,5 @@
 {
-	"name": "AWS_tmp_sii_07022024",
+	"name": "AWS_tmp_sii_16032022",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SqlServer_on_AWS",
@@ -9,7 +9,7 @@
 		"type": "SqlServerTable",
 		"schema": [
 			{
-				"name": "Rut Empleador",
+				"name": "RutEmpresa",
 				"type": "int",
 				"precision": 10
 			},
@@ -235,17 +235,17 @@
 				"precision": 10
 			},
 			{
-				"name": "Retencion prestamo clase media 2020 (Ley 21.252)(3166)",
+				"name": "Retencion prestamos 3%(3170)",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "Rebaja zona extrema DL 889(3167)",
+				"name": "Rebaja zona extrema(3190)",
 				"type": "int",
 				"precision": 10
 			},
 			{
-				"name": "Sueldo empresarial(2161)",
+				"name": "Sueldo empresarial(2134)",
 				"type": "int",
 				"precision": 10
 			},
@@ -253,56 +253,11 @@
 				"name": "Impuesto Retenido por Remuneraciones(3161)",
 				"type": "int",
 				"precision": 10
-			},
-			{
-				"name": "Asignacion Trabajo Distancia Teletrabajo(2309)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "IndemnizacionFeriadoLegal(2313)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Indemnizacion Annos Servicio(2314)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Indemnizacion SustitutivaAviso Previo(2315)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Indemnizacion Fuero Maternal(2316)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Pago indemnización a todo evento(2331)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Deposito convenido hasta UF 900(2347)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Descuento deposito convenido hasta UF 900 anual(3147)",
-				"type": "int",
-				"precision": 10
-			},
-			{
-				"name": "Donaciones culturales y de reconstruccion(3184)",
-				"type": "int",
-				"precision": 10
 			}
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "tmp_sii_07022024"
+			"table": "tmp_sii_16032022"
 		}
 	}
 }

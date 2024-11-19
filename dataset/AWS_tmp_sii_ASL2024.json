@@ -1,5 +1,5 @@
 {
-	"name": "AWS_tmp_sii_07022024",
+	"name": "AWS_tmp_sii_ASL2024",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "SqlServer_on_AWS",
@@ -15,7 +15,7 @@
 			},
 			{
 				"name": "DvEmpresa",
-				"type": "char"
+				"type": "varchar"
 			},
 			{
 				"name": "Ruttrabajador",
@@ -24,7 +24,7 @@
 			},
 			{
 				"name": "DvTrabajador",
-				"type": "char"
+				"type": "varchar"
 			},
 			{
 				"name": "Periodo",
@@ -302,7 +302,7 @@
 		],
 		"typeProperties": {
 			"schema": "dbo",
-			"table": "tmp_sii_07022024"
+			"table": "tmp_sii_ASL2024"
 		}
 	}
 }
