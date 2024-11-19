@@ -1091,7 +1091,7 @@
 				]
 			},
 			{
-				"name": "Copy data1",
+				"name": "tmp_rut_maestro_personas",
 				"type": "Copy",
 				"dependsOn": [],
 				"policy": {
@@ -1103,8 +1103,52 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"enableStaging": false
-				}
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "Rut",
+									"type": "Int32",
+									"physicalType": "int"
+								},
+								"sink": {
+									"name": "Rut",
+									"type": "Int32",
+									"physicalType": "int"
+								}
+							}
+						],
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "Azure_tmp_rut_maestro_personas",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "AWS_tmp_rut_maestro_personas",
+						"type": "DatasetReference"
+					}
+				]
 			}
 		],
 		"annotations": []
